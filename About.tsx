@@ -34,7 +34,22 @@ const AboutPage: React.FC = () => {
         </div>
       </SectionWrapper>
 
-      <SectionWrapper id="made-for-life" bg="#FFFFFF" className="py-24 md:py-48">
+      <SectionWrapper id="materials" bg="#FFFFFF" className="py-24 md:py-48 border-b border-gray-50">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <div className="space-y-12">
+            <h2 className="text-4xl md:text-7xl font-bold tracking-tight text-[#344C3D]">Thoughtful materials. Honest design.</h2>
+            <p className="text-xl md:text-2xl text-gray-400 font-light leading-relaxed">
+              Each element in the Calont Living™ system is designed to feel calm in your space and durable in your hands, so your practice becomes something you can return to, every day.
+            </p>
+          </div>
+          <div className="aspect-[4/5] bg-gray-50 overflow-hidden relative shadow-xl">
+             <img src="https://images.unsplash.com/photo-1510739859545-e7b9e979de86?q=80&w=1200" className="w-full h-full object-cover grayscale opacity-90" alt="Material Textures" />
+             <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent"></div>
+          </div>
+        </div>
+      </SectionWrapper>
+
+      <SectionWrapper id="made-for-life" bg="#F9F8F6" className="py-24 md:py-48">
         <div className="max-w-4xl mx-auto space-y-20">
           <div className="space-y-10">
             <h2 className="text-4xl md:text-7xl font-bold tracking-tight text-[#344C3D]">Made for real life. For real people.</h2>
@@ -48,7 +63,7 @@ const AboutPage: React.FC = () => {
               'Thoughtful, design-aware humans',
               'Anyone ready to live with more steadiness and clarity'
             ].map((item, i) => (
-              <div key={i} className="flex items-start gap-8 border-l border-gray-100 pl-8 py-2">
+              <div key={i} className="flex items-start gap-8 border-l border-gray-100 pl-8 py-2 bg-white/40 p-6 shadow-sm">
                 <span className="text-lg md:text-2xl font-light text-gray-400 leading-snug">{item}</span>
               </div>
             ))}
