@@ -1,340 +1,301 @@
 
-import React, { useRef, useState } from 'react';
-import { COLORS, PILLARS, SYSTEM_ARCH, FAQ_ITEMS } from './constants';
-import html2canvas from 'html2canvas';
+import React from 'react';
+import { COLORS, PILLARS, SYSTEM_ARCH, TESTIMONIALS } from './constants';
 
-// Helper for capturing a specific section as a PNG
-const captureSection = async (id: string) => {
-  const element = document.getElementById(id);
-  if (!element) return;
-  
-  // Hide capture buttons during screenshot
-  const buttons = element.querySelectorAll('.capture-btn');
-  buttons.forEach(b => (b as HTMLElement).style.visibility = 'hidden');
-
-  try {
-    const canvas = await html2canvas(element, {
-      scale: 2,
-      backgroundColor: COLORS.bg,
-      logging: false,
-      useCORS: true,
-      allowTaint: true
-    });
-
-    const link = document.createElement('a');
-    link.download = `calont-${id}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-  } catch (err) {
-    console.error("Failed to capture section:", err);
-  } finally {
-    // Show buttons again
-    buttons.forEach(b => (b as HTMLElement).style.visibility = 'visible');
-  }
-};
-
-const SectionWrapper: React.FC<{ id: string; children: React.ReactNode; bg?: string }> = ({ id, children, bg = '#F9F8F6' }) => (
-  <section id={id} style={{ backgroundColor: bg }} className="section-wrapper relative group py-24 md:py-32 border-b border-[#E8E8E8] overflow-hidden">
-    <div className="max-w-6xl mx-auto px-6">
+const SectionWrapper: React.FC<{ id: string; children: React.ReactNode; bg?: string; noPadding?: boolean }> = ({ id, children, bg = '#F9F8F6', noPadding }) => (
+  <section id={id} style={{ backgroundColor: bg }} className={`section-wrapper relative group ${noPadding ? '' : 'py-32 md:py-48'} overflow-hidden`}>
+    <div className="max-w-[1400px] mx-auto px-10 md:px-16">
       {children}
-    </div>
-    <div className="section-capture-overlay absolute top-4 right-4 z-50">
-      <button 
-        onClick={() => captureSection(id)}
-        className="capture-btn bg-[#2D2D2D] text-white text-[10px] tracking-widest uppercase px-4 py-2 hover:bg-black transition-all shadow-lg opacity-0 group-hover:opacity-100"
-      >
-        Download for Website
-      </button>
     </div>
   </section>
 );
 
-const Button: React.FC<{ label: string; primary?: boolean; className?: string }> = ({ label, primary, className = "" }) => (
-  <button className={`px-8 py-3 text-sm tracking-widest uppercase transition-all ${
-    primary 
-    ? 'bg-[#2D2D2D] text-[#F9F8F6] hover:bg-black' 
-    : 'border border-[#2D2D2D] text-[#2D2D2D] hover:bg-[#2D2D2D] hover:text-[#F9F8F6]'
-  } ${className}`}>
+const PremiumButton: React.FC<{ label: string; secondary?: boolean }> = ({ label, secondary }) => (
+  <button 
+    style={{ backgroundColor: secondary ? 'transparent' : COLORS.moss }}
+    className={`px-12 py-4 rounded-full text-white text-base font-medium tracking-tight transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm ${secondary ? 'border border-[#738A6E] text-[#738A6E]' : 'text-white'}`}
+  >
     {label}
   </button>
 );
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen selection:bg-[#E5E7E2]">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-40 bg-[#F9F8F6]/80 backdrop-blur-md border-b border-[#E8E8E8]">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="text-lg font-medium tracking-tighter">Calont Living™</div>
-          <div className="hidden md:flex space-x-10 text-[10px] tracking-widest uppercase text-[#A3A3A3]">
-            <a href="#system" className="hover:text-[#2D2D2D] transition-colors">The System</a>
-            <a href="#unboxing" className="hover:text-[#2D2D2D] transition-colors">The Package</a>
-            <a href="#pillars" className="hover:text-[#2D2D2D] transition-colors">Philosophy</a>
+    <div className="min-h-screen selection:bg-[#738A6E]/20" style={{ color: COLORS.evergreen }}>
+      {/* Top Banner */}
+      <div style={{ backgroundColor: COLORS.evergreen }} className="text-white text-center py-2.5 text-[12px] font-medium tracking-[0.1em]">
+        Not sure where to begin? Start with the Essentials Pack.
+      </div>
+
+      {/* Header */}
+      <header className="bg-white border-b border-gray-100 py-8">
+        <div className="max-w-[1400px] mx-auto px-10 md:px-16 flex items-center justify-between">
+          <div className="flex flex-col items-center group cursor-pointer">
+            <div className="text-3xl font-bold tracking-[0.25em] leading-none mb-1.5" style={{ color: COLORS.evergreen }}>CALONT</div>
+            <div className="flex items-center w-full">
+              <div className="h-[1px] bg-[#344C3D] flex-1 opacity-80"></div>
+              <div className="px-3 text-[11px] tracking-[0.5em] font-medium" style={{ color: COLORS.evergreen }}>LIVING</div>
+              <div className="h-[1px] bg-[#344C3D] flex-1 opacity-80"></div>
+            </div>
           </div>
-          <div className="text-[10px] tracking-widest uppercase font-medium cursor-pointer border-b border-[#2D2D2D]">Shop the System</div>
+          
+          <div className="flex-1 max-w-lg mx-16 hidden lg:block">
+            <div className="relative">
+              <input 
+                type="text" 
+                placeholder="Search the collection" 
+                style={{ backgroundColor: COLORS.bg }}
+                className="w-full px-5 py-2.5 text-sm rounded border border-gray-100 focus:ring-1 focus:ring-[#738A6E]/20 transition-all outline-none" 
+              />
+              <div className="absolute right-4 top-3 text-gray-400">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-10 text-[12px] font-medium uppercase tracking-[0.2em]" style={{ color: COLORS.evergreen }}>
+            {['About', 'Shop', 'Blog', 'FAQ', 'Contact'].map(item => (
+              <div key={item} className="flex flex-col items-center space-y-1.5 group cursor-pointer">
+                <div className="w-6 h-6 border border-gray-200 rounded-sm flex items-center justify-center group-hover:bg-[#BFCFBB]/20 transition-colors">
+                  <span className="text-[9px] font-bold">{item[0]}</span>
+                </div>
+                <span className="opacity-70 group-hover:opacity-100 transition-opacity">{item}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </nav>
+      </header>
 
       {/* Hero Section */}
-      <SectionWrapper id="hero">
-        <div className="flex flex-col md:flex-row items-center gap-16 pt-12">
-          <div className="flex-1 space-y-12">
-            <div className="space-y-4">
-              <span className="text-[10px] tracking-[0.4em] uppercase text-[#A3A3A3]">Everything works together</span>
-              <h1 className="text-5xl md:text-7xl font-light tracking-tight leading-[1.05] text-[#2D2D2D]">
-                A complete life-practice system.
-              </h1>
-            </div>
-            <div className="space-y-6 max-w-lg text-[#2D2D2D]">
-              <p className="text-xl font-medium">Gentle daily structure. Simple tools. A steadier, clearer life.</p>
-              <p className="text-[#A3A3A3] leading-relaxed font-light">
-                One box. One system. No distractions. The Calont Way arrives as a unified package containing your cushion, mat, timer, and guidance cards — everything needed to reclaim your focus.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button label="Shop the System" primary />
-              <Button label="See What’s Inside" />
-            </div>
-            <p className="text-[10px] tracking-[0.2em] uppercase text-[#A3A3A3]">Screen-free. Premium materials. Exclusively bundled.</p>
+      <SectionWrapper id="hero" noPadding>
+        <div className="relative h-[700px] flex items-center justify-center text-center overflow-hidden">
+          <div className="absolute inset-0 -z-10" style={{ backgroundColor: COLORS.sageHint + '33' }}>
+             <img src="https://images.unsplash.com/photo-1545240681-4966603a7465?q=80&w=2000&auto=format&fit=crop" className="w-full h-full object-cover opacity-40 grayscale" alt="Calm Interior" />
           </div>
-          <div className="flex-1 w-full aspect-square bg-[#E5E7E2] relative group overflow-hidden shadow-sm">
-            <img 
-              src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop" 
-              alt="Calont Living Packaging Box" 
-              className="w-full h-full object-cover mix-blend-multiply opacity-80 transition-transform duration-1000 group-hover:scale-110" 
-            />
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <span className="text-6xl font-light text-black/5 tracking-widest">CALONT</span>
+          <div className="space-y-8 max-w-4xl px-10">
+            <p className="font-semibold text-lg tracking-wide uppercase opacity-80" style={{ color: COLORS.evergreen }}>A complete life-practice system.</p>
+            <h1 className="text-6xl md:text-8xl font-bold tracking-tight" style={{ color: COLORS.evergreen }}>Calont Living™</h1>
+            <p className="text-2xl md:text-3xl font-light tracking-wide opacity-80">Cushion. Mat. Timer. Clarity Cards</p>
+            <p className="italic text-xl md:text-2xl text-gray-500 font-light max-w-2xl mx-auto">Thoughtfully designed to help you return to calm and clarity, every day.</p>
+            <div className="pt-8">
+              <PremiumButton label="Shop the System" />
             </div>
+            <p className="text-sm italic text-gray-400 tracking-wider pt-8 uppercase">Screen-free. Premium materials. Considered design.</p>
           </div>
         </div>
       </SectionWrapper>
 
       {/* System Architecture */}
-      <SectionWrapper id="system">
+      <SectionWrapper id="architecture">
         <div className="space-y-20">
-          <div className="max-w-3xl">
-            <h2 className="text-4xl font-light tracking-tight mb-6">Designed as a single unit.</h2>
-            <p className="text-[#A3A3A3] text-lg leading-relaxed">The Calont Living™ system is built around four calming anchors — physical objects and structured guidance that work in unison to support your daily steadiness.</p>
+          <div className="space-y-8">
+            <h2 className="text-4xl md:text-5xl font-bold max-w-3xl">Everything works together, simply and clearly.</h2>
+            <p className="max-w-4xl text-lg leading-relaxed text-gray-600 font-light">
+              The Calont Living system is built around four calming anchors, each one supporting daily steadiness in a world where the mind rarely has time to settle. Modern life moves quickly. Our minds are constantly absorbing, switching, reacting, processing. Calont Living exists to gently counterbalance that. This isn’t another app — it’s a physical, screen-free practice system that helps you settle your mind, soften emotional reactivity, and return to clarity and steadiness, every day.
+            </p>
+            <p className="italic text-lg font-medium" style={{ color: COLORS.moss }}>Motivation fades. Rhythm lasts.</p>
           </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {SYSTEM_ARCH.map((item, idx) => (
-              <div key={idx} className="space-y-8 group cursor-default">
-                <div className="aspect-[4/5] bg-white border border-[#E8E8E8] overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                  <img src={item.image} alt={item.sub} className="w-full h-full object-cover mix-blend-multiply opacity-75 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" />
+              <div key={idx} className="space-y-8 group">
+                <h3 className="text-2xl font-bold border-b border-gray-100 pb-4">{item.title} — <span className="font-light italic opacity-60">{item.sub}</span></h3>
+                <div className="aspect-[4/3] bg-white overflow-hidden shadow-sm border border-gray-100 transition-transform duration-700 group-hover:scale-[1.02]">
+                  <img src={item.image} className="w-full h-full object-cover opacity-90 grayscale hover:grayscale-0 transition-all duration-700" alt={item.title} />
                 </div>
                 <div className="space-y-3">
-                  <span className="text-[10px] uppercase tracking-widest text-[#A3A3A3]">{item.title}</span>
-                  <h3 className="text-xl font-light">{item.sub}</h3>
-                  <p className="text-sm text-[#A3A3A3] leading-relaxed font-light">{item.desc}</p>
+                  <p className="font-bold text-base leading-snug">{item.desc.split('.')[0]}.</p>
+                  <p className="text-base text-gray-500 leading-relaxed font-light">{item.desc.split('.')[1]}.</p>
                 </div>
               </div>
             ))}
           </div>
-          <div className="flex justify-between items-center border-t border-[#E8E8E8] pt-12">
-            <p className="text-xs italic text-[#A3A3A3]">Motivation fades. Rhythm lasts.</p>
-            <span className="text-[10px] tracking-widest uppercase font-semibold text-[#2D2D2D]">Available only as a complete system</span>
+          <div className="pt-8 text-center md:text-left">
+            <PremiumButton label="See What's Inside" />
           </div>
         </div>
       </SectionWrapper>
 
-      {/* Pillars */}
-      <SectionWrapper id="pillars" bg="#F2F1EF">
-        <div className="grid md:grid-cols-2 gap-24 items-start">
-          <div className="space-y-10 md:sticky md:top-32">
-            <div className="space-y-4">
-               <span className="text-[10px] tracking-widest uppercase text-[#A3A3A3]">Guidance Strategy</span>
-               <h2 className="text-4xl font-light tracking-tight">Five pillars. One clear way of living.</h2>
-            </div>
-            <p className="text-[#A3A3A3] leading-relaxed text-lg">Each Clarity Card in your system belongs to one of five colour-coded pillars — allowing you to select the precise support your mind needs in the moment.</p>
-            <div className="pt-4">
-              <Button label="Explore the Pillars" />
+      {/* Five Pillars Section */}
+      <SectionWrapper id="pillars" bg="#FFF">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <div className="space-y-12">
+            {/* Widened max-w to ensure 2-line layout on medium+ screens */}
+            <h2 className="text-4xl md:text-5xl font-bold leading-tight max-w-2xl">Five gentle practices for a steadier, clearer life.</h2>
+            <p className="text-lg text-gray-500 font-light">Each practice belongs to a color-coded foundation, so you can choose the support you need today.</p>
+            <div className="space-y-8">
+              {PILLARS.map((p, idx) => (
+                <div key={idx} className="space-y-2 border-l-2 pl-6 transition-colors" style={{ borderColor: p.color }}>
+                  <h4 className="font-bold text-xl">{p.title}</h4>
+                  <p className="text-base text-gray-500 font-light max-w-prose">{p.description}</p>
+                </div>
+              ))}
             </div>
           </div>
-          <div className="space-y-6">
-            {PILLARS.map((pillar, idx) => (
-              <div key={idx} className="flex items-center gap-8 p-8 bg-white border border-[#E8E8E8] hover:border-[#2D2D2D] transition-all group shadow-sm">
-                <div className="w-14 h-14 rounded-full shadow-inner border border-black/5" style={{ backgroundColor: pillar.color }} />
-                <div className="flex-1">
-                  <h4 className="font-medium text-sm mb-1 tracking-wide">{pillar.title}</h4>
-                  <p className="text-xs text-[#A3A3A3] leading-relaxed font-light">{pillar.description}</p>
-                </div>
-                <div className="text-[10px] text-[#A3A3A3] font-mono opacity-40">0{idx + 1}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* Unboxing */}
-      <SectionWrapper id="unboxing">
-        <div className="flex flex-col md:flex-row gap-24 items-center">
-          <div className="flex-1 space-y-12">
-            <div className="space-y-4">
-              <span className="text-[10px] tracking-widest uppercase text-[#A3A3A3]">The Experience</span>
-              <h2 className="text-4xl font-light tracking-tight leading-tight">Built for calm — from the moment you begin.</h2>
-            </div>
-            <div className="space-y-8 text-[#2D2D2D] font-light leading-relaxed text-lg">
-              <p>Life feels busy. Minds feel full. The Calont Way arrives as a physical counterbalance, structured to simplify your start.</p>
-              <div className="grid grid-cols-1 gap-8 pt-4">
-                <div className="space-y-2">
-                   <h5 className="font-medium text-xs tracking-widest uppercase">Honest Materials</h5>
-                   <p className="text-sm text-[#A3A3A3]">Soft matte neutrals, heavy-weight paper, and durable textiles designed to last a lifetime.</p>
-                </div>
-                <div className="space-y-2">
-                   <h5 className="font-medium text-xs tracking-widest uppercase">Structured Unboxing</h5>
-                   <p className="text-sm text-[#A3A3A3]">No clutter. Every component has its home, reflecting the clarity the system provides.</p>
-                </div>
-              </div>
-            </div>
-            <p className="text-sm font-medium italic border-l-2 border-[#E5E7E2] pl-6">You don’t need to do this perfectly. Just begin — gently, one day at a time.</p>
-          </div>
-          <div className="flex-1 w-full aspect-square bg-[#F9F8F6] relative group shadow-2xl overflow-hidden border border-[#E8E8E8] flex items-center justify-center">
-             <div className="w-3/4 aspect-[3/4] bg-white shadow-xl p-12 flex flex-col justify-between border border-[#E8E8E8] transition-transform duration-700 group-hover:-translate-y-4">
-                <div className="space-y-6">
-                  <div className="w-8 h-[2px] bg-[#E5E7E2]" />
-                  <h4 className="text-xl font-light tracking-tight">Your Daily Practice</h4>
-                  <ul className="space-y-4 text-[10px] tracking-widest uppercase text-[#A3A3A3]">
-                    <li className="flex gap-4">01 · Place your mat</li>
-                    <li className="flex gap-4">02 · Sit on your cushion</li>
-                    <li className="flex gap-4">03 · Flip the sand timer</li>
-                    <li className="flex gap-4">04 · Choose a card</li>
-                  </ul>
-                </div>
-                <div className="text-[10px] tracking-[0.2em] text-[#E5E7E2] uppercase">Consistency — not intensity.</div>
+          <div className="p-16 shadow-inner border border-gray-100" style={{ backgroundColor: COLORS.sageHint + '22' }}>
+             <div className="relative group overflow-hidden">
+               <img src="https://images.unsplash.com/photo-1518005020411-38b81d605de5?q=80&w=1200&auto=format&fit=crop" className="w-full opacity-60 grayscale group-hover:opacity-80 transition-opacity duration-700" alt="Meditation Practice" />
+               <div className="absolute inset-0 flex items-center justify-center">
+                 <div className="w-32 h-32 border border-[#344C3D]/10 rounded-full animate-pulse"></div>
+               </div>
              </div>
+             <div className="mt-10 text-center text-[11px] tracking-[0.3em] uppercase text-gray-400 font-medium">Practice Foundations Visualization</div>
           </div>
         </div>
       </SectionWrapper>
 
-      {/* Principles */}
-      <section id="principles" className="relative group bg-[#E5E7E2] py-24 md:py-32 overflow-hidden border-b border-[#D8DAD4]">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-light tracking-tight mb-20 text-center">Principles we build with</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {[
-              { title: 'Calm', sub: 'without noise', desc: 'Screen-free. Slow-designed. Minimalist objects for a modern mind.' },
-              { title: 'Structure', sub: 'without pressure', desc: 'Simple daily rhythms you can actually keep, regardless of life’s pace.' },
-              { title: 'Depth', sub: 'without preaching', desc: 'Human psychology. Real-world language. Grounded in actual practice.' },
-              { title: 'Consistency', sub: 'without perfection', desc: 'You can always begin again, gently. The system is here when you return.' }
-            ].map((p, idx) => (
-              <div key={idx} className="space-y-6 bg-[#F9F8F6]/70 p-10 border border-black/5 hover:bg-[#F9F8F6]/90 transition-all shadow-sm">
-                <h3 className="text-lg font-medium">{p.title} — <span className="font-light italic">{p.sub}</span></h3>
-                <p className="text-sm text-[#2D2D2D]/70 leading-relaxed font-light">{p.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="section-capture-overlay absolute top-4 right-4 z-50">
-          <button 
-            onClick={() => captureSection('principles')}
-            className="capture-btn bg-[#2D2D2D] text-white text-[10px] tracking-widest uppercase px-4 py-2 hover:bg-black transition-colors"
-          >
-            Save as Design Card
-          </button>
-        </div>
-      </section>
-
-      {/* Social Proof */}
-      <SectionWrapper id="social">
-        <h2 className="text-[10px] tracking-[0.4em] uppercase text-[#A3A3A3] text-center mb-16">What people are noticing</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 max-w-5xl mx-auto">
-          {[
-            '“I finally built a practice I look forward to. The physical objects act as a trigger for my brain to settle.”',
-            '“The Clarity Cards make it simple to begin without feeling overwhelmed. It’s practical, not abstract.”',
-            '“The sand timer is a game changer. No phone, no pings, just silence and presence for 10 minutes.”'
-          ].map((quote, idx) => (
-            <div key={idx} className="text-center space-y-6 flex flex-col items-center">
-              <p className="text-lg font-light leading-relaxed italic text-[#2D2D2D]">
-                {quote}
-              </p>
-              <div className="w-6 h-[1px] bg-[#2D2D2D]/10" />
+      {/* Why Calont Living Exists */}
+      <SectionWrapper id="why-it-exists" bg="#FDFDFD">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <div className="space-y-10">
+            <h2 className="text-4xl md:text-5xl font-bold">Why Calont Living Exists</h2>
+            <p className="italic text-lg text-gray-600 leading-relaxed">Most of us don’t need more apps, more noise, or more information. <span className="font-bold border-b transition-all" style={{ color: COLORS.evergreen, borderColor: COLORS.moss }}>We need steadiness.</span></p>
+            <p className="text-lg leading-relaxed font-light text-gray-700">
+              Calont Living was created for people who want a calmer mind and a grounded life, but in a way that feels simple, human, and real. No pressure. No performance. No pretending to be spiritual. Just a daily rhythm that helps you return to yourself.
+            </p>
+            <div className="space-y-6">
+              <p className="font-bold text-base uppercase tracking-widest opacity-80" style={{ color: COLORS.evergreen }}>So we built a physical practice system:</p>
+              <ul className="space-y-4 text-base text-gray-600 font-light">
+                {['A supportive meditation cushion', 'A grounding mat', 'A quiet sand timer', 'A guided Practice Deck for real-life moments'].map((li, i) => (
+                  <li key={i} className="flex items-center space-x-4">
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: COLORS.moss }}></span>
+                    <span>{li}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          ))}
+            <p className="text-lg text-gray-600 font-light">
+              Everything works together so you don’t have to figure anything out. You sit. Flip the timer. Choose a card. Practice gently. Over time, calm stops being something you chase, and becomes the way you live.
+            </p>
+            <p className="text-xl font-bold serif italic" style={{ color: COLORS.moss }}>That’s Calont Living.</p>
+            <div className="pt-6">
+               <PremiumButton label="About Us" />
+            </div>
+          </div>
+          <div className="relative group">
+            <div className="absolute -inset-4 border rounded-sm -z-10 group-hover:scale-105 transition-transform duration-700" style={{ borderColor: COLORS.sageHint }}></div>
+            <img src="https://images.unsplash.com/photo-1518196775741-20158462bbff?q=80&w=1200&auto=format&fit=crop" className="w-full shadow-2xl border-[20px] border-white" alt="Premium Packaging" />
+            <div className="absolute inset-0 border border-black/5 pointer-events-none"></div>
+          </div>
         </div>
       </SectionWrapper>
 
-      {/* FAQ */}
-      <SectionWrapper id="faq">
-        <div className="max-w-2xl mx-auto space-y-16">
-          <div className="space-y-4 text-center">
-            <span className="text-[10px] tracking-widest uppercase text-[#A3A3A3]">Common Questions</span>
-            <h2 className="text-3xl font-light tracking-tight">Clarity & Details</h2>
+      {/* Daily Practice Steps */}
+      <SectionWrapper id="steps">
+        <div className="space-y-24">
+          <div className="space-y-6">
+            <h2 className="text-4xl md:text-5xl font-bold max-w-4xl">Your daily practice, simple and steady.</h2>
+            <p className="text-lg text-gray-500 font-light max-w-3xl leading-relaxed">The Calont Living™ system is built around four calming anchors, so you always know how to begin. Life moves quickly. This brings you back, gently, every day.</p>
+            <p className="italic text-lg font-medium" style={{ color: COLORS.moss }}>If your mind wanders, that's the practice.</p>
           </div>
-          <div className="divide-y divide-[#E8E8E8]">
-            {FAQ_ITEMS.map((item, idx) => (
-              <div key={idx} className="py-8 group cursor-pointer">
-                <h4 className="font-medium text-sm mb-4 group-hover:translate-x-1 transition-transform">{item.q}</h4>
-                <p className="text-sm text-[#A3A3A3] leading-relaxed font-light">{item.a}</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
+            {[
+              { num: '1', title: 'Choose one Clarity Card', desc: 'Just one. Let the system guide you.', sub: 'Clear, simple guidance for your practice that day.', img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800' },
+              { num: '2', numTitle: 'Sit & turn the sand timer', desc: 'No apps. No pressure. Just presence.', sub: 'A calm daily container, without screens or clock-watching.', img: 'https://images.unsplash.com/photo-1509316785289-025f5d846b35?q=80&w=800' },
+              { num: '3', numTitle: 'Follow the gentle steps', desc: 'Clear, human guidance, always.', sub: 'Soft, steady direction you can trust, even on busy days.', img: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800' },
+              { num: '4', numTitle: 'Return tomorrow', desc: 'Consistency, without perfection.', sub: 'Most days is enough. You can always begin again, gently.', img: 'https://images.unsplash.com/photo-1499209974431-9dac3adaf471?q=80&w=800' }
+            ].map((step, idx) => (
+              <div key={idx} className="space-y-8 flex flex-col h-full">
+                <h3 className="text-2xl font-bold border-b border-gray-100 pb-4">{step.num} — <span className="font-light italic opacity-60">{step.numTitle || step.title}</span></h3>
+                <div className="aspect-[4/3] bg-white overflow-hidden border border-gray-100 shadow-sm transition-all hover:border-[#BFCFBB] group">
+                   <img src={step.img} className="w-full h-full object-cover opacity-80 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" alt={step.title} />
+                </div>
+                <div className="space-y-3 mt-auto">
+                  <p className="font-bold text-base leading-tight">{step.desc}</p>
+                  <p className="text-base text-gray-500 leading-relaxed font-light">{step.sub}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </SectionWrapper>
 
-      {/* Final CTA */}
-      <SectionWrapper id="final-cta">
-        <div className="bg-[#E5E7E2] p-16 md:p-32 text-center space-y-12 relative overflow-hidden group">
-           <div className="absolute inset-0 opacity-10 pointer-events-none transition-opacity group-hover:opacity-20">
-             <div className="absolute top-0 right-0 w-[400px] h-[400px] border border-black rounded-full -mr-48 -mt-48" />
-             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] border border-black rounded-full -ml-48 -mb-48" />
+      {/* Testimonials */}
+      <SectionWrapper id="testimonials" bg={COLORS.sageHint + '11'}>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-24 items-start">
+          <div className="space-y-10">
+            <h2 className="text-4xl md:text-5xl font-bold leading-tight">What People Say About Calont Living™</h2>
+            <p className="text-lg leading-relaxed text-gray-600 font-light">Real people. Real life. A steadier way to meet your day.<br/><span className="font-bold uppercase text-xs tracking-widest block mt-4" style={{ color: COLORS.evergreen }}>Verified Canadian & U.S. customers</span></p>
+            <div className="aspect-[3/4] bg-white p-2 shadow-xl overflow-hidden">
+               <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1200&auto=format&fit=crop" className="w-full h-full object-cover grayscale opacity-90" alt="Calm Interior" />
+            </div>
+          </div>
+          
+          <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-10 pt-4">
+            {TESTIMONIALS.map((t, idx) => (
+              <div key={idx} className="bg-white p-12 shadow-sm border border-gray-100 flex flex-col justify-between group hover:shadow-xl transition-all duration-700 hover:border-[#BFCFBB]">
+                <div>
+                  <div className="flex mb-8 space-x-1 opacity-80" style={{ color: COLORS.moss }}>
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    ))}
+                  </div>
+                  <p className="text-lg leading-relaxed mb-12 text-gray-700 font-light italic serif">"{t.text}"</p>
+                </div>
+                <div className="flex items-center justify-between border-t border-gray-50 pt-8">
+                  <div className="flex items-center space-x-5">
+                    <img src={t.img} className="w-14 h-14 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-500" alt={t.name} />
+                    <div>
+                      <div className="font-bold text-base tracking-tight">{t.name}</div>
+                      <div className="text-[11px] uppercase tracking-[0.25em] font-semibold" style={{ color: COLORS.moss }}>{t.location}</div>
+                    </div>
+                  </div>
+                  <div className="text-6xl font-serif rotate-180 select-none opacity-10" style={{ color: COLORS.moss }}>”</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* Final CTA Panel */}
+      <SectionWrapper id="final-panel">
+        <div className="relative py-32 px-12 text-center space-y-16 bg-white/40 border border-gray-100 overflow-hidden">
+           <div className="absolute inset-0 -z-10" style={{ backgroundColor: COLORS.sageHint + '11' }}>
+             <img src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?q=80&w=2000&auto=format&fit=crop" className="w-full h-full object-cover opacity-5 grayscale" alt="Background Texture" />
            </div>
-          <div className="space-y-6 relative z-10">
-            <h2 className="text-5xl md:text-6xl font-light tracking-tight leading-tight">Begin a steadier way of living.</h2>
-            <p className="text-xl text-[#2D2D2D]/70 max-w-2xl mx-auto font-light">The complete system. Gentle structure. Professional tools. One unified practice.</p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center relative z-10">
-            <Button label="Shop the System" primary className="w-full sm:w-auto" />
-            <Button label="Learn the Approach" className="w-full sm:w-auto" />
-          </div>
-          <div className="space-y-2 relative z-10">
-            <p className="text-[10px] tracking-[0.4em] uppercase text-[#A3A3A3]">Screen-free. Designed for daily life.</p>
-            <p className="text-[10px] tracking-[0.2em] italic text-[#2D2D2D]">You can always begin again, gently.</p>
-          </div>
+           <div className="space-y-8">
+             <h2 className="text-5xl md:text-7xl font-bold italic serif">Begin a steadier way of living.</h2>
+             <div className="space-y-2 text-lg text-gray-600 font-light max-w-xl mx-auto">
+               <p>Gentle daily structure. Simple tools. A clearer inner life.</p>
+               <p className="italic font-medium tracking-wide" style={{ color: COLORS.moss }}>Screen-free. Designed for daily life.</p>
+             </div>
+           </div>
+           <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+             <PremiumButton label="Shop the System" />
+             <button className="text-sm uppercase tracking-[0.3em] font-bold border-b-2 border-transparent transition-all pb-1 hover:border-[#738A6E]" style={{ color: COLORS.evergreen }}>Learn the Approach</button>
+           </div>
         </div>
       </SectionWrapper>
 
       {/* Footer */}
-      <footer className="bg-[#F9F8F6] py-24 px-6 border-t border-[#E8E8E8]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16">
-          <div className="md:col-span-4 space-y-6">
-            <div className="text-2xl font-medium tracking-tighter">Calont Living™</div>
-            <p className="text-[10px] tracking-widest leading-loose text-[#A3A3A3] uppercase max-w-xs">
-              A thoughtful design brand creating complete life-practice systems for modern humans.
-            </p>
-          </div>
-          <div className="md:col-span-2 space-y-8 text-[10px] tracking-[0.2em] uppercase text-[#A3A3A3]">
-            <h5 className="text-[#2D2D2D] font-bold">Explore</h5>
-            <div className="flex flex-col space-y-4">
-              <a href="#system" className="hover:text-[#2D2D2D] transition-colors">The System</a>
-              <a href="#unboxing" className="hover:text-[#2D2D2D] transition-colors">The Approach</a>
-              <a href="#" className="hover:text-[#2D2D2D] transition-colors">Shop All</a>
-            </div>
-          </div>
-          <div className="md:col-span-2 space-y-8 text-[10px] tracking-[0.2em] uppercase text-[#A3A3A3]">
-            <h5 className="text-[#2D2D2D] font-bold">Support</h5>
-            <div className="flex flex-col space-y-4">
-              <a href="#" className="hover:text-[#2D2D2D] transition-colors">Contact</a>
-              <a href="#faq" className="hover:text-[#2D2D2D] transition-colors">FAQ</a>
-              <a href="#" className="hover:text-[#2D2D2D] transition-colors">Shipping</a>
-            </div>
-          </div>
-          <div className="md:col-span-4 space-y-8 text-[10px] tracking-[0.2em] uppercase text-[#A3A3A3]">
-            <h5 className="text-[#2D2D2D] font-bold">Newsletter</h5>
-            <div className="flex flex-col space-y-4">
-              <p className="leading-relaxed lowercase">Slow updates. Calm insights. No noise.</p>
-              <div className="flex gap-2">
-                <input type="email" placeholder="Email Address" className="bg-transparent border-b border-[#E8E8E8] py-2 flex-1 focus:outline-none focus:border-[#2D2D2D]" />
-                <button className="text-[#2D2D2D] font-bold tracking-widest">JOIN</button>
+      <footer className="bg-white py-24 px-10 border-t border-gray-100">
+        <div className="max-w-[1400px] mx-auto space-y-16">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-12">
+            <div className="flex flex-col items-center">
+              <div className="text-3xl font-bold tracking-[0.3em] leading-none mb-2" style={{ color: COLORS.evergreen }}>CALONT</div>
+              <div className="flex items-center w-40">
+                <div className="h-[1px] bg-[#344C3D] flex-1 opacity-70"></div>
+                <div className="px-3 text-[10px] tracking-[0.6em] font-medium" style={{ color: COLORS.evergreen }}>LIVING</div>
+                <div className="h-[1px] bg-[#344C3D] flex-1 opacity-70"></div>
               </div>
             </div>
+            
+            <div className="flex flex-wrap justify-center space-x-8 md:space-x-16 text-[11px] tracking-[0.3em] uppercase font-bold text-gray-500">
+              {['About', 'Approach', 'Shop', 'Privacy', 'Terms', 'Contact'].map(link => (
+                <a key={link} href="#" className="hover:text-black hover:tracking-[0.35em] transition-all duration-300">{link}</a>
+              ))}
+            </div>
+            
+            <div className="text-[11px] tracking-[0.2em] text-gray-400 uppercase italic font-medium">
+              A thoughtful design brand.
+            </div>
           </div>
-        </div>
-        <div className="max-w-7xl mx-auto mt-24 pt-12 border-t border-[#E8E8E8] flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] tracking-[0.3em] text-[#A3A3A3] uppercase">
-          <div>&copy; 2024 Calont Living. Established in Calm.</div>
-          <div className="flex gap-10">
-            <a href="#" className="hover:text-[#2D2D2D] transition-colors">Privacy</a>
-            <a href="#" className="hover:text-[#2D2D2D] transition-colors">Terms</a>
+          
+          <div className="pt-16 border-t border-gray-50 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-gray-400 font-medium">
+            <p>&copy; {new Date().getFullYear()} Calont Living System. All Rights Reserved.</p>
+            <p className="mt-4 md:mt-0">Designed for a steadier, clearer life.</p>
           </div>
         </div>
       </footer>
