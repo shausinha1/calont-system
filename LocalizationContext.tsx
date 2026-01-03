@@ -15,14 +15,14 @@ interface LocalizationContextType {
 
 const translations: Record<Language, Record<string, string>> = {
   EN: {
-    'nav.home': 'Home',
-    'nav.approach': 'Approach',
-    'nav.shop': 'Shop',
-    'nav.blog': 'Blog',
-    'nav.about': 'About',
+    'nav.home': 'HOME',
+    'nav.approach': 'APPROACH',
+    'nav.shop': 'SHOP',
+    'nav.blog': 'BLOG',
+    'nav.about': 'ABOUT',
     'nav.faq': 'FAQ',
-    'nav.account': 'Account',
-    'nav.order': 'Order Pack',
+    'nav.account': 'ACCOUNT',
+    'nav.order': 'ORDER PACK',
     'hero.title': 'Calont Living™',
     'hero.subtitle': 'Cushion. Mat. Timer. Clarity Cards',
     'hero.desc': 'Thoughtfully designed to help you return to calm and clarity, every day.',
@@ -38,14 +38,14 @@ const translations: Record<Language, Record<string, string>> = {
     'shop.added': 'Added to Pack'
   },
   FR: {
-    'nav.home': 'Accueil',
-    'nav.approach': 'Approche',
-    'nav.shop': 'Boutique',
-    'nav.blog': 'Blogue',
-    'nav.about': 'À propos',
+    'nav.home': 'ACCUEIL',
+    'nav.approach': 'APPROCHE',
+    'nav.shop': 'BOUTIQUE',
+    'nav.blog': 'BLOGUE',
+    'nav.about': 'À PROPOS',
     'nav.faq': 'FAQ',
-    'nav.account': 'Compte',
-    'nav.order': 'Commander',
+    'nav.account': 'COMPTE',
+    'nav.order': 'COMMANDER',
     'hero.title': 'Calont Living™',
     'hero.subtitle': 'Coussin. Tapis. Sablier. Cartes de clarté',
     'hero.desc': 'Conçu avec soin pour vous aider à retrouver calme et clarté, chaque jour.',
@@ -82,7 +82,6 @@ export const LocalizationProvider: React.FC<{ children: ReactNode }> = ({ childr
   }, [language]);
 
   useEffect(() => {
-    // Fix: Corrected typo from CUR_KEY to CURR_KEY to match the constant definition.
     localStorage.setItem(CURR_KEY, currency);
   }, [currency]);
 
@@ -90,14 +89,12 @@ export const LocalizationProvider: React.FC<{ children: ReactNode }> = ({ childr
 
   const formatPrice = (amount: number, baseCurrency: string = 'USD') => {
     let finalAmount = amount;
-    // Handle currency conversion logic
     if (baseCurrency === 'USD' && currency === 'CAD') {
       finalAmount = amount * EXCHANGE_RATE;
     } else if (baseCurrency === 'CAD' && currency === 'USD') {
       finalAmount = amount / EXCHANGE_RATE;
     }
 
-    // Use 'code' to output "USD 285" or "285 CAD" instead of ambiguous "$" symbol
     return new Intl.NumberFormat(language === 'EN' ? 'en-US' : 'fr-CA', {
       style: 'currency',
       currency: currency,

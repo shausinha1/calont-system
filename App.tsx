@@ -93,34 +93,34 @@ const App: React.FC = () => {
           <div className="text-[8px] md:text-[9px] tracking-[0.8em] font-medium text-gray-400 uppercase w-full pl-[0.8em]">LIVING</div>
         </div>
 
-        <nav className="hidden lg:flex items-center space-x-10 xl:space-x-14 text-[10px] font-bold uppercase tracking-[0.45em]">
+        <nav className="hidden lg:flex items-center space-x-8 xl:space-x-12 text-[10px] font-bold uppercase tracking-[0.45em]">
           <button 
             onClick={() => navigateTo('home')} 
-            className={`${currentPage === 'home' ? 'text-black font-bold' : 'text-gray-400 font-medium'} uppercase tracking-[0.45em] hover:text-black transition-colors transition-all duration-300`}
+            className={`${currentPage === 'home' ? 'text-black' : 'text-gray-400'} uppercase hover:text-black transition-all duration-300`}
           >
             {t('nav.home')}
           </button>
           <button 
             onClick={() => navigateTo('approach')} 
-            className={`${currentPage === 'approach' ? 'text-black font-bold' : 'text-gray-400 font-medium'} uppercase tracking-[0.45em] hover:text-black transition-colors transition-all duration-300`}
+            className={`${currentPage === 'approach' ? 'text-black' : 'text-gray-400'} uppercase hover:text-black transition-all duration-300`}
           >
             {t('nav.approach')}
           </button>
           <button 
             onClick={() => navigateTo('shop')} 
-            className={`${currentPage === 'shop' ? 'text-black font-bold' : 'text-gray-400 font-medium'} uppercase tracking-[0.45em] hover:text-black transition-colors transition-all duration-300`}
+            className={`${currentPage === 'shop' ? 'text-black' : 'text-gray-400'} uppercase hover:text-black transition-all duration-300`}
           >
             {t('nav.shop')}
           </button>
           <button 
             onClick={() => navigateTo('blog')} 
-            className={`${currentPage === 'blog' ? 'text-black font-bold' : 'text-gray-400 font-medium'} uppercase tracking-[0.45em] hover:text-black transition-colors transition-all duration-300`}
+            className={`${currentPage === 'blog' ? 'text-black' : 'text-gray-400'} uppercase hover:text-black transition-all duration-300`}
           >
             {t('nav.blog')}
           </button>
           <button 
             onClick={() => navigateTo('about')} 
-            className={`${currentPage === 'about' ? 'text-black font-bold' : 'text-gray-400 font-medium'} uppercase tracking-[0.45em] hover:text-black transition-colors transition-all duration-300`}
+            className={`${currentPage === 'about' ? 'text-black' : 'text-gray-400'} uppercase hover:text-black transition-all duration-300`}
           >
             {t('nav.about')}
           </button>
@@ -137,12 +137,12 @@ const App: React.FC = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
             </svg>
             {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-[#738A6E] text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center animate-in zoom-in duration-300">
+              <span className="absolute -top-2 -right-2 bg-[#738A6E] text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 {cartCount}
               </span>
             )}
           </button>
-          <button onClick={() => navigateTo('shop')} className="hidden sm:block bg-[#344C3D] text-white px-6 xl:px-8 py-2.5 rounded-full text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-black transition-all shadow-sm">
+          <button onClick={() => navigateTo('shop')} className="hidden sm:block bg-[#344C3D] text-white px-6 py-2.5 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-black transition-all">
             {t('nav.order')}
           </button>
         </div>
