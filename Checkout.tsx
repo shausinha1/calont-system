@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import SectionWrapper from './components/SectionWrapper';
-import PremiumButton from './components/PremiumButton';
+import SectionWrapper from './SectionWrapper';
+import PremiumButton from './PremiumButton';
 import { useCart } from './CartContext';
 import { fetchAllProducts, createShopifyCheckout } from './shopifyService';
 import { Product } from './types';
@@ -53,21 +53,6 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ onComplete, onBackToShop })
       setError(e.message || "The connection to secure checkout was interrupted.");
       setIsProcessing(false);
     }
-  };
-
-  const handleAddSuggestion = (p: Product) => {
-    const variant = p.variants[0];
-    addToCart({
-      id: '',
-      productId: p.id,
-      variantId: variant.id,
-      name: p.name,
-      price: parseFloat(variant.price.amount),
-      currency: variant.price.currencyCode,
-      quantity: 1,
-      color: variant.title,
-      image: variant.image?.url || 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200'
-    });
   };
 
   if (cart.length === 0) {

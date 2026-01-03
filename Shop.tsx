@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import SectionWrapper from './components/SectionWrapper';
-import PremiumButton from './components/PremiumButton';
+import SectionWrapper from './SectionWrapper';
+import PremiumButton from './PremiumButton';
 import { fetchAllProducts } from './shopifyService';
 import { useCart } from './CartContext';
 import { Product, ShopifyVariant } from './types';
@@ -191,7 +191,7 @@ const ShopPage: React.FC = () => {
 
               <div className="pt-12 border-t border-gray-50">
                  <p className="text-[8px] uppercase tracking-[0.3em] text-gray-300 font-bold mb-4">Shipping & Handling</p>
-                 <p className="text-[11px] text-gray-400 font-medium">Complimentary shipping on orders over $250. Packaged with care from Calgary, Alberta.</p>
+                 <p className="text-[11px] text-gray-400 font-medium">Complimentary shipping on orders over 250 USD. Packaged with care from Calgary, Alberta.</p>
               </div>
             </div>
           </div>

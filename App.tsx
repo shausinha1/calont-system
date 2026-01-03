@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { COLORS } from './constants';
-import SectionWrapper from './components/SectionWrapper';
-import PremiumButton from './components/PremiumButton';
-import ShoppingGuide from './components/ShoppingGuide';
+import SectionWrapper from './SectionWrapper';
+import PremiumButton from './PremiumButton';
+import ShoppingGuide from './ShoppingGuide';
 import AboutPage from './About';
 import ContactPage from './Contact';
 import AccountPage from './Account';
@@ -25,10 +25,8 @@ const App: React.FC = () => {
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   useEffect(() => {
-    // Artificial delay to ensure a smooth transition from Shopify theme to React app
     const timer = setTimeout(() => {
       setIsAppLoading(false);
-      // Remove any Shopify theme residuals from the body if running as a takeover
       document.body.style.overflow = 'auto';
     }, 1200);
     return () => clearTimeout(timer);
@@ -68,28 +66,16 @@ const App: React.FC = () => {
         <div className="max-w-[1600px] mx-auto px-5 md:px-10 flex justify-between items-center text-[9px] font-bold uppercase tracking-[0.2em] text-gray-400">
           <div className="flex gap-6 items-center">
             <div className="flex gap-2">
-              <button 
-                onClick={() => setLanguage('EN')} 
-                className={`hover:text-[#344C3D] transition-colors ${language === 'EN' ? 'text-[#344C3D]' : ''}`}
-              >EN</button>
+              <button onClick={() => setLanguage('EN')} className={`hover:text-[#344C3D] transition-colors ${language === 'EN' ? 'text-[#344C3D]' : ''}`}>EN</button>
               <span className="opacity-20">/</span>
-              <button 
-                onClick={() => setLanguage('FR')} 
-                className={`hover:text-[#344C3D] transition-colors ${language === 'FR' ? 'text-[#344C3D]' : ''}`}
-              >FR</button>
+              <button onClick={() => setLanguage('FR')} className={`hover:text-[#344C3D] transition-colors ${language === 'FR' ? 'text-[#344C3D]' : ''}`}>FR</button>
             </div>
           </div>
           <div className="flex gap-6 items-center">
             <div className="flex gap-2">
-              <button 
-                onClick={() => setCurrency('USD')} 
-                className={`hover:text-[#344C3D] transition-colors ${currency === 'USD' ? 'text-[#344C3D]' : ''}`}
-              >USD</button>
+              <button onClick={() => setCurrency('USD')} className={`hover:text-[#344C3D] transition-colors ${currency === 'USD' ? 'text-[#344C3D]' : ''}`}>USD</button>
               <span className="opacity-20">/</span>
-              <button 
-                onClick={() => setCurrency('CAD')} 
-                className={`hover:text-[#344C3D] transition-colors ${currency === 'CAD' ? 'text-[#344C3D]' : ''}`}
-              >CAD</button>
+              <button onClick={() => setCurrency('CAD')} className={`hover:text-[#344C3D] transition-colors ${currency === 'CAD' ? 'text-[#344C3D]' : ''}`}>CAD</button>
             </div>
           </div>
         </div>
@@ -164,7 +150,6 @@ const App: React.FC = () => {
         </div>
       </SectionWrapper>
       
-      {/* Visual Transition: Principles */}
       <SectionWrapper id="intro" bg="#F9F8F6" className="py-24 md:py-48">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
           <div className="space-y-12">
