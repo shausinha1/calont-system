@@ -1,18 +1,18 @@
 
 import React, { useState, useEffect } from 'react';
-import { COLORS } from './constants.ts';
-import SectionWrapper from './SectionWrapper.tsx';
-import PremiumButton from './PremiumButton.tsx';
-import ShoppingGuide from './ShoppingGuide.tsx';
-import AboutPage from './About.tsx';
-import ContactPage from './Contact.tsx';
-import AccountPage from './Account.tsx';
-import BlogPage from './Blog.tsx';
-import ShopPage from './Shop.tsx';
-import CheckoutPage from './Checkout.tsx';
-import ApproachPage from './Approach.tsx';
-import FAQPage from './FAQ.tsx';
-import { useCart } from './CartContext.tsx';
+import { COLORS } from './constants';
+import SectionWrapper from './SectionWrapper';
+import PremiumButton from './PremiumButton';
+import ShoppingGuide from './ShoppingGuide';
+import AboutPage from './About';
+import ContactPage from './Contact';
+import AccountPage from './Account';
+import BlogPage from './Blog';
+import ShopPage from './Shop';
+import CheckoutPage from './Checkout';
+import ApproachPage from './Approach';
+import FAQPage from './FAQ';
+import { useCart } from './CartContext';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'contact' | 'account' | 'blog' | 'shop' | 'checkout' | 'approach' | 'faq'>('home');
@@ -139,14 +139,14 @@ const App: React.FC = () => {
           </div>
           <div className="relative z-10 max-w-6xl px-5 space-y-10 md:space-y-16">
             <div className="space-y-4 md:space-y-6">
-              <p className="font-bold text-[10px] md:text-[13px] tracking-[0.6em] uppercase text-[#344C3D]/60">A complete life-practice system.</p>
-              <h1 className="text-6xl sm:text-7xl md:text-9xl lg:text-[140px] font-bold tracking-tighter leading-[0.85] text-[#344C3D]">Calont Living™</h1>
+              <p className="font-bold text-[10px] md:text-[13px] tracking-[0.6em] uppercase text-[#344C3D]/60 animate-in fade-in slide-in-from-top-4 duration-700">A complete life-practice system.</p>
+              <h1 className="text-6xl sm:text-7xl md:text-9xl lg:text-[140px] font-bold tracking-tighter leading-[0.85] text-[#344C3D] animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">Calont Living™</h1>
             </div>
-            <div className="space-y-6 md:space-y-8">
+            <div className="space-y-6 md:space-y-8 animate-in fade-in duration-1000 delay-300">
               <p className="text-xl md:text-5xl font-serif italic text-[#344C3D]/80">Cushion. Mat. Timer. Clarity Cards</p>
               <p className="text-base md:text-2xl font-light text-gray-500 max-w-2xl mx-auto leading-relaxed px-6 md:px-0">Thoughtfully designed to help you return to calm and clarity, every day.</p>
             </div>
-            <div className="pt-8 md:pt-14">
+            <div className="pt-8 md:pt-14 animate-in fade-in zoom-in-95 duration-1000 delay-500">
               <PremiumButton label="Shop the System" className="w-full max-w-[320px]" onClick={() => navigateTo('shop')} />
             </div>
           </div>

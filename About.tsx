@@ -1,6 +1,6 @@
 
 import React from 'react';
-import SectionWrapper from './components/SectionWrapper';
+import SectionWrapper from './SectionWrapper';
 
 const AboutPage: React.FC = () => {
   return (
