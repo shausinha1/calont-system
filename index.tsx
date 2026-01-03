@@ -1,8 +1,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
-import { CartProvider } from './CartContext.tsx';
+import App from './App';
+import { CartProvider } from './CartContext';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {

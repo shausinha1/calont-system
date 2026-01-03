@@ -1,18 +1,18 @@
 
 import React, { useState, useEffect } from 'react';
-import { COLORS } from './constants.ts';
-import SectionWrapper from './components/SectionWrapper.tsx';
-import PremiumButton from './components/PremiumButton.tsx';
-import ShoppingGuide from './components/ShoppingGuide.tsx';
-import AboutPage from './About.tsx';
-import ContactPage from './Contact.tsx';
-import AccountPage from './Account.tsx';
-import BlogPage from './Blog.tsx';
-import ShopPage from './Shop.tsx';
-import CheckoutPage from './Checkout.tsx';
-import ApproachPage from './Approach.tsx';
-import FAQPage from './FAQ.tsx';
-import { useCart } from './CartContext.tsx';
+import { COLORS } from './constants';
+import SectionWrapper from './components/SectionWrapper';
+import PremiumButton from './components/PremiumButton';
+import ShoppingGuide from './components/ShoppingGuide';
+import AboutPage from './About';
+import ContactPage from './Contact';
+import AccountPage from './Account';
+import BlogPage from './Blog';
+import ShopPage from './Shop';
+import CheckoutPage from './Checkout';
+import ApproachPage from './Approach';
+import FAQPage from './FAQ';
+import { useCart } from './CartContext';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'contact' | 'account' | 'blog' | 'shop' | 'checkout' | 'approach' | 'faq'>('home');
@@ -135,7 +135,7 @@ const App: React.FC = () => {
 
   const HomePage = () => (
     <div className="animate-in fade-in duration-1000">
-      {/* Hero Section - Refined for Product Focus */}
+      {/* Hero Section - Restored and Focused on Product */}
       <SectionWrapper id="hero" noPadding fullWidth className="bg-[#FFFFFF]">
         <div className="relative min-h-[90dvh] flex flex-col items-center justify-center text-center py-12 md:py-20 overflow-hidden">
           <div className="absolute inset-0 z-0">
@@ -162,7 +162,7 @@ const App: React.FC = () => {
         </div>
       </SectionWrapper>
 
-      {/* Target Audience Section - "Created for people..." */}
+      {/* Product Purpose Section */}
       <SectionWrapper id="purpose" bg="#FFFFFF" className="py-24 md:py-48 border-b border-gray-50">
         <div className="max-w-4xl mx-auto space-y-16 md:space-y-24">
           <div className="space-y-8">
@@ -190,28 +190,7 @@ const App: React.FC = () => {
         </div>
       </SectionWrapper>
 
-      {/* The "Why" Section */}
-      <SectionWrapper id="why" bg="#F9F8F6" className="py-24 md:py-48">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div className="space-y-10">
-            <h2 className="text-4xl md:text-7xl font-bold tracking-tighter text-[#344C3D] leading-none">Because the mind rarely gets time to settle.</h2>
-            <p className="text-xl md:text-3xl font-serif italic text-[#738A6E]">Modern life moves quickly. Our minds are constantly absorbing, switching, reacting, processing.</p>
-          </div>
-          <div className="space-y-8">
-            <p className="text-lg md:text-2xl font-light text-gray-400 leading-relaxed">
-              Calont Living™ exists to quietly counterbalance that — with simple, screen-free tools and a clear daily rhythm that supports a steadier inner life.
-            </p>
-            <button 
-              onClick={() => navigateTo('approach')} 
-              className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#344C3D] border-b border-[#344C3D]/20 hover:border-[#344C3D] transition-all pb-1"
-            >
-              Learn the Approach
-            </button>
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* Your Daily Practice Steps */}
+      {/* Practice Steps Section */}
       <SectionWrapper id="steps" bg="#FFFFFF" className="py-24 md:py-48">
         <div className="space-y-24 md:space-y-32">
           <div className="max-w-4xl space-y-10">
@@ -219,7 +198,6 @@ const App: React.FC = () => {
             <p className="text-lg md:text-2xl text-gray-400 font-light max-w-3xl leading-relaxed">
               The Calont Living™ system is built around four calming anchors, so you always know how to begin. Life moves quickly. This brings you back, gently, every day.
             </p>
-            <p className="text-xl md:text-2xl font-serif italic text-[#738A6E]">If your mind wanders, that’s the practice.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
@@ -250,13 +228,12 @@ const App: React.FC = () => {
         </div>
       </SectionWrapper>
 
-      {/* Testimonials */}
+      {/* Social Proof Section */}
       <SectionWrapper id="testimonials" bg="#F9F8F6" className="py-24 md:py-48">
         <div className="space-y-24">
           <div className="text-center space-y-6">
             <h2 className="text-4xl md:text-7xl font-bold tracking-tight text-[#344C3D]">What People Say About Calont Living™</h2>
             <p className="text-xl text-gray-400 font-light">Real people. Real life. A steadier way to meet your day.</p>
-            <p className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#738A6E]">Canadian & U.S. customers</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 max-w-6xl mx-auto">
@@ -279,7 +256,7 @@ const App: React.FC = () => {
         </div>
       </SectionWrapper>
       
-      {/* Final Product CTA */}
+      {/* Final Conversion CTA */}
       <SectionWrapper id="cta-final" bg="#FFFFFF" className="py-32 md:py-48">
         <div className="max-w-4xl mx-auto text-center space-y-12 md:space-y-20">
           <div className="space-y-6">
