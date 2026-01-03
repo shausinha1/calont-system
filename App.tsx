@@ -1,18 +1,18 @@
 
 import React, { useState, useEffect } from 'react';
-import { COLORS } from './constants';
-import SectionWrapper from './components/SectionWrapper';
-import PremiumButton from './components/PremiumButton';
-import ShoppingGuide from './components/ShoppingGuide';
-import AboutPage from './About';
-import ContactPage from './Contact';
-import AccountPage from './Account';
-import BlogPage from './Blog';
-import ShopPage from './Shop';
-import CheckoutPage from './Checkout';
-import ApproachPage from './Approach';
-import FAQPage from './FAQ';
-import { useCart } from './CartContext';
+import { COLORS } from './constants.ts';
+import SectionWrapper from './components/SectionWrapper.tsx';
+import PremiumButton from './components/PremiumButton.tsx';
+import ShoppingGuide from './components/ShoppingGuide.tsx';
+import AboutPage from './About.tsx';
+import ContactPage from './Contact.tsx';
+import AccountPage from './Account.tsx';
+import BlogPage from './Blog.tsx';
+import ShopPage from './Shop.tsx';
+import CheckoutPage from './Checkout.tsx';
+import ApproachPage from './Approach.tsx';
+import FAQPage from './FAQ.tsx';
+import { useCart } from './CartContext.tsx';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'contact' | 'account' | 'blog' | 'shop' | 'checkout' | 'approach' | 'faq'>('home');
@@ -135,35 +135,43 @@ const App: React.FC = () => {
 
   const HomePage = () => (
     <div className="animate-in fade-in duration-1000">
-      {/* Hero Section */}
+      {/* Hero Section - Refined for Product Focus */}
       <SectionWrapper id="hero" noPadding fullWidth className="bg-[#FFFFFF]">
         <div className="relative min-h-[90dvh] flex flex-col items-center justify-center text-center py-12 md:py-20 overflow-hidden">
           <div className="absolute inset-0 z-0">
              <img 
-               src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=2500&auto=format&fit=crop" 
-               className="w-full h-full object-cover opacity-[0.25] grayscale transform scale-105" 
-               alt="Minimalist Space" 
+               src="https://images.unsplash.com/photo-1545240681-4966603a7465?q=80&w=2500&auto=format&fit=crop" 
+               className="w-full h-full object-cover opacity-[0.25] grayscale transform scale-100" 
+               alt="Calont Living Interior" 
              />
-             <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-[#FFFFFF]/50 to-[#FFFFFF]"></div>
+             <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-[#FFFFFF]/40 to-[#FFFFFF]"></div>
           </div>
-          <div className="relative z-10 max-w-6xl px-5 space-y-12 md:space-y-24">
-            <div className="space-y-8">
-              <h1 className="text-4xl md:text-8xl lg:text-[100px] font-bold tracking-tight leading-[1.1] text-[#344C3D] max-w-4xl mx-auto">
-                Created for people who value clarity, and thoughtful design.
-              </h1>
+          <div className="relative z-10 max-w-6xl px-5 space-y-10 md:space-y-16">
+            <div className="space-y-4 md:space-y-6">
+              <p className="font-bold text-[10px] md:text-[13px] tracking-[0.6em] uppercase text-[#344C3D]/60 animate-in fade-in slide-in-from-top-4 duration-700">A complete life-practice system.</p>
+              <h1 className="text-6xl sm:text-7xl md:text-9xl lg:text-[140px] font-bold tracking-tighter leading-[0.85] text-[#344C3D] animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">Calont Living™</h1>
             </div>
-            <div className="pt-8 md:pt-14">
-              <PremiumButton label="Shop the Collection" onClick={() => navigateTo('shop')} />
+            <div className="space-y-6 md:space-y-8 animate-in fade-in duration-1000 delay-300">
+              <p className="text-xl md:text-5xl font-serif italic text-[#344C3D]/80">Cushion. Mat. Timer. Clarity Cards</p>
+              <p className="text-base md:text-2xl font-light text-gray-500 max-w-2xl mx-auto leading-relaxed px-6 md:px-0">Thoughtfully designed to help you return to calm and clarity, every day.</p>
+            </div>
+            <div className="pt-8 md:pt-14 animate-in fade-in zoom-in-95 duration-1000 delay-500">
+              <PremiumButton label="Shop the System" className="w-full max-w-[320px]" onClick={() => navigateTo('shop')} />
             </div>
           </div>
         </div>
       </SectionWrapper>
 
-      {/* This system is for you if: */}
-      <SectionWrapper id="for-you" bg="#F9F8F6" className="py-24 md:py-48">
-        <div className="max-w-4xl mx-auto space-y-16">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-[#344C3D]">This system is for you if:</h2>
-          <ul className="space-y-10">
+      {/* Target Audience Section - "Created for people..." */}
+      <SectionWrapper id="purpose" bg="#FFFFFF" className="py-24 md:py-48 border-b border-gray-50">
+        <div className="max-w-4xl mx-auto space-y-16 md:space-y-24">
+          <div className="space-y-8">
+            <h2 className="text-4xl md:text-6xl lg:text-[80px] font-bold tracking-tight text-[#344C3D] leading-tight">
+              Created for people who value clarity, and thoughtful design.
+            </h2>
+            <p className="text-xl md:text-3xl font-bold text-[#344C3D]">This system is for you if:</p>
+          </div>
+          <ul className="space-y-12">
             {[
               'you want steadiness you can return to, most days',
               'you prefer simple structure over overwhelm',
@@ -171,10 +179,10 @@ const App: React.FC = () => {
               'you care about objects made with intention',
               'you’re ready to live a little more gently, every day'
             ].map((item, i) => (
-              <li key={i} className="flex items-start gap-10 group">
-                <div className="w-2 h-2 rounded-full bg-[#738A6E] mt-4 flex-shrink-0 group-hover:scale-150 transition-transform"></div>
-                <span className="text-xl md:text-4xl font-light text-gray-500 leading-tight">
-                  {item}
+              <li key={i} className="flex items-start gap-8 md:gap-12 group">
+                <div className="w-2 h-2 rounded-full bg-[#738A6E] mt-4 flex-shrink-0 group-hover:scale-150 transition-transform duration-500"></div>
+                <span className="text-xl md:text-4xl font-light text-gray-500 leading-tight group-hover:text-[#344C3D] transition-colors">
+                  • {item}
                 </span>
               </li>
             ))}
@@ -182,25 +190,33 @@ const App: React.FC = () => {
         </div>
       </SectionWrapper>
 
-      {/* Why Section */}
-      <SectionWrapper id="mission" bg="#FFFFFF" className="py-24 md:py-48 border-b border-gray-50">
+      {/* The "Why" Section */}
+      <SectionWrapper id="why" bg="#F9F8F6" className="py-24 md:py-48">
         <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="space-y-10">
             <h2 className="text-4xl md:text-7xl font-bold tracking-tighter text-[#344C3D] leading-none">Because the mind rarely gets time to settle.</h2>
             <p className="text-xl md:text-3xl font-serif italic text-[#738A6E]">Modern life moves quickly. Our minds are constantly absorbing, switching, reacting, processing.</p>
           </div>
-          <p className="text-lg md:text-2xl font-light text-gray-400 leading-relaxed">
-            Calont Living™ exists to quietly counterbalance that — with simple, screen-free tools and a clear daily rhythm that supports a steadier inner life.
-          </p>
+          <div className="space-y-8">
+            <p className="text-lg md:text-2xl font-light text-gray-400 leading-relaxed">
+              Calont Living™ exists to quietly counterbalance that — with simple, screen-free tools and a clear daily rhythm that supports a steadier inner life.
+            </p>
+            <button 
+              onClick={() => navigateTo('approach')} 
+              className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#344C3D] border-b border-[#344C3D]/20 hover:border-[#344C3D] transition-all pb-1"
+            >
+              Learn the Approach
+            </button>
+          </div>
         </div>
       </SectionWrapper>
 
-      {/* Your Daily Practice Section */}
-      <SectionWrapper id="daily-practice" bg="#F9F8F6" className="py-24 md:py-48">
+      {/* Your Daily Practice Steps */}
+      <SectionWrapper id="steps" bg="#FFFFFF" className="py-24 md:py-48">
         <div className="space-y-24 md:space-y-32">
-          <div className="max-w-4xl space-y-8">
-            <h2 className="text-5xl md:text-8xl font-bold tracking-tighter text-[#344C3D] leading-none">Your daily practice, simple and steady.</h2>
-            <p className="text-lg md:text-2xl text-gray-400 font-light max-w-2xl leading-relaxed">
+          <div className="max-w-4xl space-y-10">
+            <h2 className="text-5xl md:text-8xl font-bold tracking-tighter text-[#344C3D] leading-[0.9]">Your daily practice, <br className="hidden md:block"/>simple and steady.</h2>
+            <p className="text-lg md:text-2xl text-gray-400 font-light max-w-3xl leading-relaxed">
               The Calont Living™ system is built around four calming anchors, so you always know how to begin. Life moves quickly. This brings you back, gently, every day.
             </p>
             <p className="text-xl md:text-2xl font-serif italic text-[#738A6E]">If your mind wanders, that’s the practice.</p>
@@ -208,28 +224,34 @@ const App: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
             {[
-              { num: '1', title: 'Choose one Clarity Card', sub: 'Just one. Let the system guide you.', desc: 'Clear, simple guidance for your practice that day.' },
-              { num: '2', title: 'Sit & turn the sand timer', sub: 'No apps. No pressure. Just presence.', desc: 'A calm daily container, without screens or clock-watching.' },
-              { num: '3', title: 'Follow the gentle steps', sub: 'Clear, human guidance, always.', desc: 'Soft, steady direction you can trust, even on busy days.' },
-              { num: '4', title: 'Return tomorrow', sub: 'Consistency, without perfection.', desc: 'Most days is enough. You can always begin again, gently.' }
+              { num: '1', title: 'Choose one Clarity Card', sub: 'Just one. Let the system guide you.', desc: 'Clear, simple guidance for your practice that day.', img: 'https://images.unsplash.com/photo-1512418490979-92798ccc93a0?q=80&w=800' },
+              { num: '2', title: 'Sit & turn the sand timer', sub: 'No apps. No pressure. Just presence.', desc: 'A calm daily container, without screens or clock-watching.', img: 'https://images.unsplash.com/photo-1509316785289-025f5d846b35?q=80&w=800' },
+              { num: '3', title: 'Follow the gentle steps', sub: 'Clear, human guidance, always.', desc: 'Soft, steady direction you can trust, even on busy days.', img: 'https://images.unsplash.com/photo-1545240681-4966603a7465?q=80&w=800' },
+              { num: '4', title: 'Return tomorrow', sub: 'Consistency, without perfection.', desc: 'Most days is enough. You can always begin again, gently.', img: 'https://images.unsplash.com/photo-1499209974431-9dac3adaf471?q=80&w=800' }
             ].map((step, idx) => (
-              <div key={idx} className="space-y-8 bg-white p-10 border border-gray-50 flex flex-col h-full shadow-sm hover:shadow-lg transition-all">
-                <div className="flex items-baseline gap-4 border-b border-gray-50 pb-6">
+              <div key={idx} className="space-y-8 group">
+                <div className="flex items-baseline gap-4 border-b border-gray-100 pb-4">
                   <span className="text-3xl font-bold text-[#344C3D]">{step.num}</span>
                   <span className="text-sm font-bold uppercase tracking-widest text-gray-300">— {step.title}</span>
                 </div>
-                <div className="space-y-6 flex-1">
-                  <p className="text-2xl font-bold text-[#344C3D] leading-tight">{step.sub}</p>
+                <div className="aspect-[4/5] bg-gray-50 overflow-hidden shadow-sm border border-gray-50">
+                  <img src={step.img} className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt="" />
+                </div>
+                <div className="space-y-4">
+                  <p className="text-xl font-bold text-[#344C3D] leading-tight">{step.sub}</p>
                   <p className="text-base text-gray-400 font-light leading-relaxed">{step.desc}</p>
                 </div>
               </div>
             ))}
           </div>
+          <div className="pt-12 text-center">
+            <PremiumButton label="Explore the Essentials Pack" onClick={() => navigateTo('shop')} />
+          </div>
         </div>
       </SectionWrapper>
 
       {/* Testimonials */}
-      <SectionWrapper id="testimonials" bg="#FFFFFF" className="py-24 md:py-48">
+      <SectionWrapper id="testimonials" bg="#F9F8F6" className="py-24 md:py-48">
         <div className="space-y-24">
           <div className="text-center space-y-6">
             <h2 className="text-4xl md:text-7xl font-bold tracking-tight text-[#344C3D]">What People Say About Calont Living™</h2>
@@ -242,15 +264,38 @@ const App: React.FC = () => {
               { text: "Calont Living gave me something I could actually return to. No pressure. No apps. Just a gentle anchor in my day. Over time, I noticed I was reacting less and feeling more at ease — even when life was full.", name: "Rosa G.", location: "Calgary, AB" },
               { text: "I didn’t realize how much noise my mind was carrying until I began practising regularly. The simplicity helped — sit, breathe, return. It feels like calm I can rely on now, not something I have to chase.", name: "Sarah M.", location: "Calgary, AB" }
             ].map((t, idx) => (
-              <div key={idx} className="bg-[#F9F8F6] p-12 md:p-16 space-y-12 border border-gray-50">
+              <div key={idx} className="bg-white p-12 md:p-20 space-y-12 border border-gray-50 shadow-sm">
                 <p className="text-xl md:text-3xl font-serif italic text-[#344C3D] leading-relaxed">"{t.text}"</p>
-                <div>
-                  <p className="font-bold text-[#344C3D] text-lg">{t.name}</p>
-                  <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold">{t.location}</p>
+                <div className="flex items-center gap-6">
+                  <div className="w-1.5 h-10 bg-[#738A6E]/30"></div>
+                  <div>
+                    <p className="font-bold text-[#344C3D] text-lg">{t.name}</p>
+                    <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold">{t.location}</p>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+      </SectionWrapper>
+      
+      {/* Final Product CTA */}
+      <SectionWrapper id="cta-final" bg="#FFFFFF" className="py-32 md:py-48">
+        <div className="max-w-4xl mx-auto text-center space-y-12 md:space-y-20">
+          <div className="space-y-6">
+            <h2 className="text-5xl md:text-8xl font-bold tracking-tighter text-[#344C3D]">Begin your practice.</h2>
+            <p className="text-xl md:text-3xl font-light text-gray-400 max-w-2xl mx-auto">Everything you need for a daily rhythm of clarity and steadiness.</p>
+          </div>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+            <PremiumButton label="Order the Essentials Pack" onClick={() => navigateTo('shop')} />
+            <button 
+              onClick={() => navigateTo('approach')} 
+              className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#344C3D] py-4 px-10 border border-[#344C3D]/10 rounded-full hover:bg-gray-50 transition-all"
+            >
+              View Approach
+            </button>
+          </div>
+          <p className="text-[9px] uppercase tracking-[0.5em] font-bold text-gray-300">Complimentary Shipping Included</p>
         </div>
       </SectionWrapper>
     </div>

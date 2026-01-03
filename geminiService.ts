@@ -1,7 +1,7 @@
 
 import { GoogleGenAI, Type, Chat } from "@google/genai";
-import { ClarityCard } from "./types";
-import { ESSENTIALS_PACK, BUSINESS_INFO } from "./constants";
+import { ClarityCard } from "./types.ts";
+import { ESSENTIALS_PACK, BUSINESS_INFO } from "./constants.ts";
 
 const API_KEY = process.env.API_KEY;
 
