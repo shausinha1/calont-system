@@ -36,40 +36,6 @@ export const ESSENTIALS_PACK: Product = {
   ]
 };
 
-export const ANCHORS = [
-  {
-    title: 'Seat — The Meditation Cushion',
-    sub: 'Grounds your body, so the mind can settle.',
-    desc: 'Soft, steady support that helps you arrive, relax, and stay. When the body is comfortable, the mind follows.',
-    image: 'https://images.unsplash.com/photo-1596438459194-f275f413d6ff?q=80&w=800&auto=format&fit=crop'
-  },
-  {
-    title: 'Space — The Practice Mat',
-    sub: 'Creates a calm place you return to.',
-    desc: 'One dedicated space builds familiarity and rhythm. Sit here often — and your nervous system recognises “calm.”',
-    image: 'https://images.unsplash.com/photo-1545204445-024ee1ad2a0d?q=80&w=800&auto=format&fit=crop'
-  },
-  {
-    title: 'Time — The Sand Timer',
-    sub: 'Builds rhythm, without screens or pressure.',
-    desc: 'A simple daily container. No apps. No clock-watching. Just gentle, steady practice.',
-    image: 'https://images.unsplash.com/photo-1509316785289-025f5d846b35?q=80&w=800&auto=format&fit=crop'
-  },
-  {
-    title: 'Guidance — The Clarity Cards',
-    sub: 'Gives you clear practice, every single day.',
-    desc: 'Human, simple guidance so you always know what to do, and you can return to calm, even on busy days.',
-    image: 'https://images.unsplash.com/photo-1512418490979-92798ccc93a0?q=80&w=800&auto=format&fit=crop'
-  }
-];
-
-export const PRINCIPLES = [
-  { title: 'Calm — without noise', desc: 'Screen-free. Slow-designed. Minimal.' },
-  { title: 'Structure — without pressure', desc: 'Simple rhythms you can actually keep.' },
-  { title: 'Depth — without preaching', desc: 'Human psychology. Real-world language.' },
-  { title: 'Consistency — without perfection', desc: 'You can always begin again, gently.' }
-];
-
 export const BLOG_POSTS = [
   {
     id: '1',
