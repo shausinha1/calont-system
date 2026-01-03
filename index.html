@@ -13,9 +13,18 @@
     <meta name="theme-color" content="#344C3D">
     
     <style>
-      /* Takeover Styles: Hides Shopify's default Dawn theme elements if injected */
-      #MainContent, .shopify-section, #shopify-section-header, #shopify-section-footer, .announcement-bar {
+      /* Takeover Styles: Force hides Shopify's default Dawn theme if DNS is still propagating */
+      #MainContent, 
+      .shopify-section, 
+      #shopify-section-header, 
+      #shopify-section-footer, 
+      .announcement-bar,
+      .header-wrapper,
+      footer.footer {
         display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        overflow: hidden !important;
       }
 
       body {
@@ -43,11 +52,9 @@
         animation: float 6s ease-in-out infinite;
       }
 
-      /* Hide scrollbar for Chrome, Safari and Opera */
       .scrollbar-hide::-webkit-scrollbar {
         display: none;
       }
-      /* Hide scrollbar for IE, Edge and Firefox */
       .scrollbar-hide {
         -ms-overflow-style: none;
         scrollbar-width: none;

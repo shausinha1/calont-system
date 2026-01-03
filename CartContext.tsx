@@ -19,13 +19,11 @@ const LOCAL_STORAGE_KEY = 'calont_cart_v1';
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>(() => {
-    // Load initial cart from localStorage
     const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
     return saved ? JSON.parse(saved) : [];
   });
   const [orders, setOrders] = useState<Order[]>([]);
 
-  // Persist cart changes to localStorage
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(cart));
   }, [cart]);
