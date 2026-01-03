@@ -17,22 +17,46 @@ export const COLORS = {
   charcoal: '#2D2D2D'
 };
 
+// Fix: ESSENTIALS_PACK was specifying properties not defined in the Product type.
+// Restructured to move price and image data into the variants array to satisfy the interface.
 export const ESSENTIALS_PACK: Product = {
   id: 'calont-essentials',
   name: 'The Essentials Pack',
-  price: 285,
   description: 'The complete Calont Living™ system. A physical container for your daily rhythm, designed to help you return to calm and clarity. Crafted from premium, sustainable materials for a lifetime of practice.',
-  included: [
-    'Buckwheat-Filled Meditation Cushion (Zafu)',
-    'Flax-Lined Grounding Practice Mat (Zabuton)',
-    '10-Minute Quiet Sand Timer (Borosilicate Glass)',
-    'Clarity Card Practice Deck (52 Gold-Foil Cards)'
-  ],
-  image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200&auto=format&fit=crop',
-  colors: [
-    { name: 'Moss', hex: '#738A6E', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200&auto=format&fit=crop' },
-    { name: 'Evergreen', hex: '#344C3D', image: 'https://images.unsplash.com/photo-1545240681-4966603a7465?q=80&w=1200&auto=format&fit=crop' },
-    { name: 'Charcoal', hex: '#2D2D2D', image: 'https://images.unsplash.com/photo-1510739859545-e7b9e979de86?q=80&w=1200&auto=format&fit=crop' }
+  variants: [
+    {
+      id: 'variant-moss',
+      title: 'Moss',
+      price: {
+        amount: '285',
+        currencyCode: 'USD'
+      },
+      image: {
+        url: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200&auto=format&fit=crop'
+      }
+    },
+    {
+      id: 'variant-evergreen',
+      title: 'Evergreen',
+      price: {
+        amount: '285',
+        currencyCode: 'USD'
+      },
+      image: {
+        url: 'https://images.unsplash.com/photo-1545240681-4966603a7465?q=80&w=1200&auto=format&fit=crop'
+      }
+    },
+    {
+      id: 'variant-charcoal',
+      title: 'Charcoal',
+      price: {
+        amount: '285',
+        currencyCode: 'USD'
+      },
+      image: {
+        url: 'https://images.unsplash.com/photo-1510739859545-e7b9e979de86?q=80&w=1200&auto=format&fit=crop'
+      }
+    }
   ]
 };
 

@@ -3,12 +3,11 @@ import { GoogleGenAI, Type, Chat } from "@google/genai";
 import { ClarityCard } from "./types";
 import { ESSENTIALS_PACK, BUSINESS_INFO } from "./constants";
 
-const API_KEY = process.env.API_KEY;
-
-const getAI = () => new GoogleGenAI({ apiKey: API_KEY! });
+// Fix: Direct initialization of GoogleGenAI using process.env.API_KEY as per guidelines.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const generateClarityCard = async (userMood: string): Promise<ClarityCard> => {
-  const ai = getAI();
+  // Fix: Directly use the correctly initialized `ai` instance.
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
     contents: `The user says they feel: "${userMood}". Generate a Calont Living "Clarity Card" practice for them. Select one of the 5 Calont Pillars (Settle, Soften, Steady, Seek, Shine).`,
@@ -28,13 +27,14 @@ export const generateClarityCard = async (userMood: string): Promise<ClarityCard
     }
   });
 
+  // Fix: Access `.text` property directly as per the latest SDK requirements.
   const text = response.text;
   if (!text) throw new Error("No response from AI");
   return JSON.parse(text) as ClarityCard;
 };
 
 export const startShoppingChat = (): Chat => {
-  const ai = getAI();
+  // Fix: Use the established `ai` instance for creating chat sessions.
   return ai.chats.create({
     model: "gemini-3-flash-preview",
     config: {
@@ -43,7 +43,7 @@ export const startShoppingChat = (): Chat => {
       TONE: Premium, minimalist, soothing, and direct. NEVER use emojis. Be brief but helpful.
       
       CORE KNOWLEDGE:
-      - The main product is the 'Essentials Pack' priced at $285 USD.
+      - The main product is the 'Essentials Pack' priced at 285 USD.
       - It includes 4 Anchors: The Meditation Cushion (Seat), The Practice Mat (Space), The Sand Timer (Time), and Clarity Cards (Guidance).
       - Philosophy: Screen-free, daily rhythm, returning to calm, steadiness over performance.
       - Location: Based in Calgary, Alberta, Canada.
@@ -55,7 +55,7 @@ export const startShoppingChat = (): Chat => {
       - Timer: 10-minute borosilicate glass.
       - Cards: 52 gold-foil guidance cards.
       
-      Refer to the system as a 'container for your daily rhythm'.`
+      Refer to the system as a 'container for your daily rhythm'. Always specify currency as USD or CAD to avoid confusion.`
     }
   });
 };

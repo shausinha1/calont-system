@@ -6,6 +6,7 @@ import ClarityCardGenerator from './ClarityCardGenerator';
 const ApproachPage: React.FC = () => {
   return (
     <div className="animate-in fade-in duration-700">
+      {/* Five Gentle Practices */}
       <SectionWrapper id="approach-header" bg="#FFFFFF" className="pt-24 md:pt-48 pb-12">
         <div className="max-w-4xl space-y-12">
           <h1 className="text-5xl md:text-[100px] font-bold tracking-tighter leading-[0.9] text-[#344C3D]">Five gentle practices for a steadier, clearer life.</h1>
@@ -35,6 +36,7 @@ const ApproachPage: React.FC = () => {
         </div>
       </SectionWrapper>
 
+      {/* Card Breakdown */}
       <SectionWrapper id="card-breakdown" bg="#FFFFFF" className="py-24 md:py-48 border-b border-gray-50">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <div className="space-y-12">
@@ -46,11 +48,8 @@ const ApproachPage: React.FC = () => {
                <p className="text-xl md:text-2xl font-bold text-[#344C3D]">Each Calont Living Clarity Card includes:</p>
                <ul className="space-y-4">
                  {[
-                   'Clear, step-by-step guidance',
-                   'When to use the practice',
-                   'Why it matters',
-                   'How it shapes the mind',
-                   'What begins to change with repetition'
+                   'Clear, step-by-step guidance', 'When to use the practice', 'Why it matters', 
+                   'How it shapes the mind', 'What begins to change with repetition'
                  ].map((li, i) => (
                    <li key={i} className="flex items-center gap-4 text-lg md:text-2xl font-light text-gray-500">
                      <div className="w-1.5 h-1.5 rounded-full bg-[#738A6E]"></div>
@@ -73,6 +72,7 @@ const ApproachPage: React.FC = () => {
         </div>
       </SectionWrapper>
 
+      {/* Practice Duration */}
       <SectionWrapper id="duration" bg="#F9F8F6" className="py-24 md:py-48 text-center">
          <div className="max-w-3xl mx-auto space-y-12">
             <h2 className="text-4xl md:text-7xl font-bold text-[#344C3D] tracking-tighter">How long should I practice?</h2>
@@ -85,6 +85,7 @@ const ApproachPage: React.FC = () => {
          </div>
       </SectionWrapper>
 
+      {/* Clarity Card Generator */}
       <SectionWrapper id="generator" bg="#FFFFFF" className="py-24 md:py-48 border-t border-gray-50">
         <ClarityCardGenerator />
       </SectionWrapper>

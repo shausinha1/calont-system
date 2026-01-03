@@ -1,6 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { CartItem, Order } from './types';
+import { createShopifyCheckout } from './shopifyService';
 
 interface CartContextType {
   cart: CartItem[];
@@ -8,21 +9,32 @@ interface CartContextType {
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, delta: number) => void;
-  completeCheckout: () => void;
+  completeCheckout: () => Promise<void>;
   clearCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+const LOCAL_STORAGE_KEY = 'calont_cart_v1';
+
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    // Load initial cart from localStorage
+    const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return saved ? JSON.parse(saved) : [];
+  });
   const [orders, setOrders] = useState<Order[]>([]);
+
+  // Persist cart changes to localStorage
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (newItem: CartItem) => {
     setCart(prev => {
-      const existing = prev.find(i => i.productId === newItem.productId && i.color === newItem.color);
+      const existing = prev.find(i => i.variantId === newItem.variantId);
       if (existing) {
-        return prev.map(i => i.id === existing.id ? { ...i, quantity: i.quantity + newItem.quantity } : i);
+        return prev.map(i => i.variantId === existing.variantId ? { ...i, quantity: i.quantity + newItem.quantity } : i);
       }
       return [...prev, { ...newItem, id: Math.random().toString(36).substr(2, 9) }];
     });
@@ -38,18 +50,26 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const clearCart = () => setCart([]);
 
-  const completeCheckout = () => {
+  const completeCheckout = async () => {
     if (cart.length === 0) return;
-    const total = cart.reduce((acc, i) => acc + (i.price * i.quantity), 0);
-    const newOrder: Order = {
-      id: Math.floor(1000 + Math.random() * 9000).toString(),
-      date: new Date().toLocaleDateString(),
-      total,
-      status: 'Processing',
-      items: [...cart]
-    };
-    setOrders(prev => [newOrder, ...prev]);
-    setCart([]);
+    
+    try {
+      const checkoutUrl = await createShopifyCheckout(
+        cart.map(item => ({
+          variantId: item.variantId,
+          quantity: item.quantity
+        }))
+      );
+
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      } else {
+        throw new Error("Shopify did not return a valid checkout link.");
+      }
+    } catch (error: any) {
+      console.error("Checkout process failed:", error);
+      throw error;
+    }
   };
 
   return (

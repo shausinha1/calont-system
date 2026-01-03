@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { CartProvider } from './CartContext';
+import { LocalizationProvider } from './LocalizationContext';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -12,8 +13,10 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <CartProvider>
-      <App />
-    </CartProvider>
+    <LocalizationProvider>
+      <CartProvider>
+        <App />
+      </CartProvider>
+    </LocalizationProvider>
   </React.StrictMode>
 );

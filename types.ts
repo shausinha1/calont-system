@@ -6,21 +6,32 @@ export interface ClarityCard {
   reflection: string;
 }
 
+export interface ShopifyVariant {
+  id: string;
+  title: string;
+  price: {
+    amount: string;
+    currencyCode: string;
+  };
+  image?: {
+    url: string;
+  };
+}
+
 export interface Product {
   id: string;
   name: string;
-  price: number;
   description: string;
-  included: string[];
-  image: string;
-  colors: { name: string; hex: string; image: string }[];
+  variants: ShopifyVariant[];
 }
 
 export interface CartItem {
   id: string;
   productId: string;
+  variantId: string; // The real Shopify GID
   name: string;
   price: number;
+  currency: string;
   quantity: number;
   color: string;
   image: string;
