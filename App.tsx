@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { COLORS } from './constants';
-import SectionWrapper from './components/SectionWrapper';
-import PremiumButton from './components/PremiumButton';
-import ShoppingGuide from './components/ShoppingGuide';
+import SectionWrapper from './SectionWrapper';
+import PremiumButton from './PremiumButton';
+import ShoppingGuide from './ShoppingGuide';
 import AboutPage from './About';
 import ContactPage from './Contact';
 import AccountPage from './Account';
@@ -45,7 +45,7 @@ const App: React.FC = () => {
     return (
       <div className="fixed inset-0 bg-white z-[9999] flex flex-col items-center justify-center space-y-8">
         <div className="flex flex-col items-center">
-          <div className="text-2xl font-bold tracking-[0.5em] text-[#344C3D] animate-pulse">CALONT</div>
+          <div className="text-2xl font-bold tracking-[0.5em] text-[#344C3D] animate-pulse uppercase">CALONT</div>
           <div className="text-[9px] tracking-[0.8em] font-medium text-gray-300 uppercase mt-2">LIVING</div>
         </div>
         <div className="w-12 h-px bg-gray-100 relative overflow-hidden">
@@ -89,38 +89,38 @@ const App: React.FC = () => {
         </button>
 
         <div className="flex flex-col items-center cursor-pointer scale-90 md:scale-100 lg:mr-20" onClick={() => navigateTo('home')}>
-          <div className="text-xl md:text-2xl font-bold tracking-[0.5em] leading-none mb-1 text-[#344C3D]">CALONT</div>
+          <div className="text-xl md:text-2xl font-bold tracking-[0.5em] leading-none mb-1 text-[#344C3D] uppercase">CALONT</div>
           <div className="text-[8px] md:text-[9px] tracking-[0.8em] font-medium text-gray-400 uppercase w-full pl-[0.8em]">LIVING</div>
         </div>
 
-        <nav className="hidden lg:flex items-center space-x-8 xl:space-x-12 text-[10px] font-bold uppercase tracking-[0.45em]">
+        <nav className="hidden lg:flex items-center space-x-8 xl:space-x-12 text-[10px] font-bold uppercase tracking-[0.4em]">
           <button 
             onClick={() => navigateTo('home')} 
-            className={`${currentPage === 'home' ? 'text-black' : 'text-gray-400'} uppercase hover:text-black transition-all duration-300`}
+            className={`${currentPage === 'home' ? 'text-black font-bold' : 'text-gray-400 font-medium'} hover:text-black transition-all duration-300 uppercase tracking-[0.3em]`}
           >
             {t('nav.home')}
           </button>
           <button 
             onClick={() => navigateTo('approach')} 
-            className={`${currentPage === 'approach' ? 'text-black' : 'text-gray-400'} uppercase hover:text-black transition-all duration-300`}
+            className={`${currentPage === 'approach' ? 'text-black font-bold' : 'text-gray-400 font-medium'} hover:text-black transition-all duration-300 uppercase tracking-[0.3em]`}
           >
             {t('nav.approach')}
           </button>
           <button 
             onClick={() => navigateTo('shop')} 
-            className={`${currentPage === 'shop' ? 'text-black' : 'text-gray-400'} uppercase hover:text-black transition-all duration-300`}
+            className={`${currentPage === 'shop' ? 'text-black font-bold' : 'text-gray-400 font-medium'} hover:text-black transition-all duration-300 uppercase tracking-[0.3em]`}
           >
             {t('nav.shop')}
           </button>
           <button 
             onClick={() => navigateTo('blog')} 
-            className={`${currentPage === 'blog' ? 'text-black' : 'text-gray-400'} uppercase hover:text-black transition-all duration-300`}
+            className={`${currentPage === 'blog' ? 'text-black font-bold' : 'text-gray-400 font-medium'} hover:text-black transition-all duration-300 uppercase tracking-[0.3em]`}
           >
             {t('nav.blog')}
           </button>
           <button 
             onClick={() => navigateTo('about')} 
-            className={`${currentPage === 'about' ? 'text-black' : 'text-gray-400'} uppercase hover:text-black transition-all duration-300`}
+            className={`${currentPage === 'about' ? 'text-black font-bold' : 'text-gray-400 font-medium'} hover:text-black transition-all duration-300 uppercase tracking-[0.3em]`}
           >
             {t('nav.about')}
           </button>
@@ -142,7 +142,7 @@ const App: React.FC = () => {
               </span>
             )}
           </button>
-          <button onClick={() => navigateTo('shop')} className="hidden sm:block bg-[#344C3D] text-white px-6 py-2.5 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-black transition-all">
+          <button onClick={() => navigateTo('shop')} className="hidden sm:block bg-[#344C3D] text-white px-8 py-3 rounded-full text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-black transition-all shadow-sm">
             {t('nav.order')}
           </button>
         </div>
@@ -164,7 +164,7 @@ const App: React.FC = () => {
               <h1 className="text-6xl sm:text-7xl md:text-9xl lg:text-[140px] font-bold tracking-tighter leading-[0.85] text-[#344C3D]">{t('hero.title')}</h1>
             </div>
             <div className="space-y-6 md:space-y-8">
-              <p className="text-xl md:text-5xl font-serif italic text-[#344C3D]/80">{t('hero.subtitle')}</p>
+              <p className="text-xl md:text-5xl font-serif italic text-[#344C3D]/80 uppercase tracking-widest">{t('hero.subtitle')}</p>
               <p className="text-base md:text-2xl font-light text-gray-500 max-w-2xl mx-auto leading-relaxed px-6 md:px-0">{t('hero.desc')}</p>
             </div>
             <div className="pt-8 md:pt-14">
@@ -221,7 +221,7 @@ const App: React.FC = () => {
         <div className="fixed inset-0 z-[100] bg-white animate-in slide-in-from-left duration-300">
            <div className="p-8 flex flex-col h-full">
               <div className="flex justify-between items-center mb-16">
-                 <div className="font-bold tracking-[0.5em] text-[#344C3D]">CALONT</div>
+                 <div className="font-bold tracking-[0.5em] text-[#344C3D] uppercase">CALONT</div>
                  <button onClick={() => setIsMenuOpen(false)} className="p-2">
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
                  </button>
@@ -240,7 +240,7 @@ const App: React.FC = () => {
       <footer className="bg-[#F9F8F6] py-24 border-t border-gray-100">
         <div className="max-w-[1200px] mx-auto px-5 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-16">
           <div className="space-y-6">
-            <div className="text-xl font-bold tracking-[0.5em] text-[#344C3D]">CALONT</div>
+            <div className="text-xl font-bold tracking-[0.5em] text-[#344C3D] uppercase">CALONT</div>
             <p className="text-sm text-gray-400 font-light leading-relaxed">
               {language === 'EN' ? 'Steadiness over performance. Rhythm over motivation. Designed in Calgary.' : 'La stabilité avant la performance. Le rythme avant la motivation. Conçu à Calgary.'}
             </p>
