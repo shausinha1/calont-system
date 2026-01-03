@@ -18,10 +18,21 @@ import { useLocalization } from './LocalizationContext';
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'contact' | 'account' | 'blog' | 'shop' | 'checkout' | 'approach' | 'faq'>('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAppLoading, setIsAppLoading] = useState(true);
   const { cart } = useCart();
   const { language, currency, setLanguage, setCurrency, t } = useLocalization();
 
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+  useEffect(() => {
+    // Artificial delay to ensure a smooth transition from Shopify theme to React app
+    const timer = setTimeout(() => {
+      setIsAppLoading(false);
+      // Remove any Shopify theme residuals from the body if running as a takeover
+      document.body.style.overflow = 'auto';
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -32,9 +43,27 @@ const App: React.FC = () => {
     setIsMenuOpen(false);
   };
 
+  if (isAppLoading) {
+    return (
+      <div className="fixed inset-0 bg-white z-[9999] flex flex-col items-center justify-center space-y-8">
+        <div className="flex flex-col items-center">
+          <div className="text-2xl font-bold tracking-[0.5em] text-[#344C3D] animate-pulse">CALONT</div>
+          <div className="text-[9px] tracking-[0.8em] font-medium text-gray-300 uppercase mt-2">LIVING</div>
+        </div>
+        <div className="w-12 h-px bg-gray-100 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[#344C3D] translate-x-[-100%] animate-[shimmer_2s_infinite]"></div>
+        </div>
+        <style>{`
+          @keyframes shimmer {
+            100% { transform: translateX(100%); }
+          }
+        `}</style>
+      </div>
+    );
+  }
+
   const Header = () => (
     <header className="bg-white/95 backdrop-blur-xl border-b border-gray-50 sticky top-0 z-50">
-      {/* Premium Top Bar with Toggles */}
       <div className="bg-[#F9F8F6] border-b border-gray-100 py-2">
         <div className="max-w-[1600px] mx-auto px-5 md:px-10 flex justify-between items-center text-[9px] font-bold uppercase tracking-[0.2em] text-gray-400">
           <div className="flex gap-6 items-center">
@@ -67,20 +96,17 @@ const App: React.FC = () => {
       </div>
 
       <div className="max-w-[1600px] mx-auto px-5 md:px-10 py-5 md:py-7 flex items-center">
-        {/* Mobile Menu Button */}
         <button onClick={() => setIsMenuOpen(true)} className="lg:hidden p-2 -ml-2 text-[#344C3D]">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 8h16M4 16h16" />
           </svg>
         </button>
 
-        {/* Logo */}
         <div className="flex flex-col items-center cursor-pointer scale-90 md:scale-100 lg:mr-20" onClick={() => navigateTo('home')}>
           <div className="text-xl md:text-2xl font-bold tracking-[0.5em] leading-none mb-1 text-[#344C3D]">CALONT</div>
           <div className="text-[8px] md:text-[9px] tracking-[0.8em] font-medium text-gray-400 uppercase w-full pl-[0.8em]">LIVING</div>
         </div>
 
-        {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-10 xl:space-x-14 text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400">
           <button onClick={() => navigateTo('home')} className={`${currentPage === 'home' ? 'text-black' : ''} hover:text-black transition-colors`}>{t('nav.home')}</button>
           <button onClick={() => navigateTo('approach')} className={`${currentPage === 'approach' ? 'text-black' : ''} hover:text-black transition-colors`}>{t('nav.approach')}</button>
@@ -89,23 +115,13 @@ const App: React.FC = () => {
           <button onClick={() => navigateTo('about')} className={`${currentPage === 'about' ? 'text-black' : ''} hover:text-black transition-colors`}>{t('nav.about')}</button>
         </nav>
 
-        {/* Utility Area */}
         <div className="flex items-center ml-auto gap-6 md:gap-8 xl:gap-10">
-          <button 
-            onClick={() => navigateTo('account')} 
-            className={`flex items-center transition-colors ${currentPage === 'account' ? 'text-black' : 'text-gray-400 hover:text-black'}`}
-            title={t('nav.account')}
-          >
+          <button onClick={() => navigateTo('account')} className={`flex items-center transition-colors ${currentPage === 'account' ? 'text-black' : 'text-gray-400 hover:text-black'}`}>
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
           </button>
-
-          <button 
-            onClick={() => navigateTo('checkout')} 
-            className={`relative flex items-center transition-colors ${currentPage === 'checkout' ? 'text-black' : 'text-gray-400 hover:text-black'}`}
-            title="Cart"
-          >
+          <button onClick={() => navigateTo('checkout')} className={`relative flex items-center transition-colors ${currentPage === 'checkout' ? 'text-black' : 'text-gray-400 hover:text-black'}`}>
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
             </svg>
@@ -115,11 +131,7 @@ const App: React.FC = () => {
               </span>
             )}
           </button>
-
-          <button 
-            onClick={() => navigateTo('shop')} 
-            className="hidden sm:block bg-[#344C3D] text-white px-6 xl:px-8 py-2.5 rounded-full text-[9px] font-bold tracking-[0.3em] uppercase hover:bg-black transition-all shadow-sm"
-          >
+          <button onClick={() => navigateTo('shop')} className="hidden sm:block bg-[#344C3D] text-white px-6 xl:px-8 py-2.5 rounded-full text-[9px] font-bold tracking-[0.3em] uppercase hover:bg-black transition-all shadow-sm">
             {t('nav.order')}
           </button>
         </div>
@@ -151,7 +163,26 @@ const App: React.FC = () => {
           </div>
         </div>
       </SectionWrapper>
-      {/* Rest of home content would use t() as well */}
+      
+      {/* Visual Transition: Principles */}
+      <SectionWrapper id="intro" bg="#F9F8F6" className="py-24 md:py-48">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+          <div className="space-y-12">
+            <h2 className="text-4xl md:text-7xl font-bold tracking-tight text-[#344C3D] leading-[0.9]">Everything works together, simply and clearly.</h2>
+            <p className="text-lg md:text-xl text-gray-500 font-light leading-relaxed">
+              Modern life is built for speed. Calont is built for steadiness. A physical system designed to help you settle your mind, soften emotional reactivity, and return to clarity, every day.
+            </p>
+            <div className="pt-4">
+              <button onClick={() => navigateTo('approach')} className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#344C3D] border-b border-[#344C3D]/20 pb-2 hover:border-[#344C3D] transition-all">
+                Learn the Approach →
+              </button>
+            </div>
+          </div>
+          <div className="aspect-square bg-white shadow-2xl relative overflow-hidden grayscale">
+             <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1200" className="w-full h-full object-cover opacity-80" alt="Calont Living Space" />
+          </div>
+        </div>
+      </SectionWrapper>
     </div>
   );
 

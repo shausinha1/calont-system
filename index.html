@@ -12,16 +12,29 @@
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#344C3D">
     
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-    
     <style>
+      /* Takeover Styles: Hides Shopify's default Dawn theme elements if injected */
+      #MainContent, .shopify-section, #shopify-section-header, #shopify-section-footer, .announcement-bar {
+        display: none !important;
+      }
+
       body {
         font-family: 'Inter', sans-serif;
         background-color: #FFFFFF;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
       }
+      
+      #root {
+        min-height: 100vh;
+        display: block;
+      }
+
       .font-serif {
         font-family: 'Playfair Display', serif;
       }
+      
       @keyframes float {
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-10px); }
@@ -29,13 +42,7 @@
       .animate-float {
         animation: float 6s ease-in-out infinite;
       }
-      .adsbygoogle {
-        display: block;
-        background: transparent;
-      }
-      .ad-placeholder {
-        min-height: 100px;
-      }
+
       /* Hide scrollbar for Chrome, Safari and Opera */
       .scrollbar-hide::-webkit-scrollbar {
         display: none;
@@ -61,7 +68,6 @@
   <body>
     <div id="root"></div>
     <script>
-      // Register a minimal service worker for PWA functionality
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js').catch(err => {

@@ -30,7 +30,7 @@ export const fetchAllProducts = async () => {
             id
             handle
             title
-            description
+            descriptionHtml
             variants(first: 20) {
               edges {
                 node {
@@ -62,18 +62,19 @@ export const fetchAllProducts = async () => {
         id: p.id,
         handle: p.handle,
         name: p.title,
-        description: p.description,
+        description: p.descriptionHtml || '',
         variants: p.variants.edges.map((vEdge: any) => vEdge.node)
       };
     });
   } catch (error) {
-    console.error("Failed to fetch catalog from Shopify:", error);
+    console.error("Failed to fetch catalog from Shopify Storefront API:", error);
     return [];
   }
 };
 
 /**
  * Creates a Shopify Cart and returns the checkout URL.
+ * Ensure your products are available to the 'Headless' or 'Storefront' app in Shopify Admin.
  */
 export const createShopifyCheckout = async (items: { variantId: string, quantity: number }[]) => {
   const query = `
@@ -109,12 +110,12 @@ export const createShopifyCheckout = async (items: { variantId: string, quantity
     }
     
     if (!result.cart || !result.cart.checkoutUrl) {
-      throw new Error("Shopify returned an empty cart. Ensure products are published to the Storefront channel.");
+      throw new Error("Shopify returned an empty cart result. Verify product availability.");
     }
     
     return result.cart.checkoutUrl;
   } catch (error) {
-    console.error("Shopify Cart Error:", error);
+    console.error("Shopify Checkout Error:", error);
     throw error;
   }
 };
