@@ -23,7 +23,7 @@ const PremiumButton: React.FC<PremiumButtonProps> = ({
     disabled={disabled || loading}
     className={`
       relative overflow-hidden group
-      px-12 py-5 rounded-full text-[10px] font-bold tracking-[0.3em] uppercase 
+      px-12 py-5 rounded-full text-base font-bold tracking-tight
       transition-all duration-500 ease-out
       ${secondary 
         ? 'border border-gray-200 text-gray-500 hover:border-black hover:text-black' 

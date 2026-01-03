@@ -38,7 +38,7 @@ const ClarityCardGenerator: React.FC = () => {
           </p>
           <div className="space-y-6">
             <div className="space-y-3">
-              <label className="text-[9px] uppercase tracking-[0.3em] font-bold text-gray-400 block">Current Mood</label>
+              <label className="text-sm font-bold text-gray-400 block tracking-tight">Current mood</label>
               <input 
                 type="text" 
                 value={mood}
@@ -60,7 +60,7 @@ const ClarityCardGenerator: React.FC = () => {
         <div className="relative min-h-[350px] md:min-h-[500px] flex items-center justify-center">
           {card ? (
             <div className="w-full bg-white p-8 md:p-16 shadow-lg border border-gray-50 animate-float">
-              <div className="text-[9px] uppercase tracking-[0.4em] font-bold mb-6 text-[#738A6E]">
+              <div className="text-[10px] font-bold mb-6 text-[#738A6E] tracking-wide">
                 {card.pillar}
               </div>
               <h4 className="text-2xl md:text-4xl font-serif mb-6 text-[#344C3D] leading-tight">{card.title}</h4>
@@ -68,13 +68,13 @@ const ClarityCardGenerator: React.FC = () => {
                 {card.instruction}
               </p>
               <div className="pt-8 border-t border-gray-50">
-                <p className="text-[8px] uppercase tracking-[0.2em] text-gray-300 font-bold mb-2">Reflection</p>
+                <p className="text-xs font-bold text-gray-300 mb-2 tracking-tight">Today's reflection</p>
                 <p className="text-sm font-medium text-[#344C3D]">{card.reflection}</p>
               </div>
             </div>
           ) : (
             <div className="w-full aspect-[4/5] bg-gray-50/50 rounded-sm flex flex-col items-center justify-center text-gray-300 space-y-4 border border-gray-100 border-dashed p-10">
-              <p className="text-[8px] uppercase tracking-[0.3em] font-bold text-center">Your card will appear here</p>
+              <p className="text-xs font-bold text-center tracking-tight">Your card will appear here</p>
             </div>
           )}
         </div>

@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { COLORS } from './constants';
-import SectionWrapper from './SectionWrapper';
-import PremiumButton from './PremiumButton';
-import ShoppingGuide from './ShoppingGuide';
+import SectionWrapper from './components/SectionWrapper';
+import PremiumButton from './components/PremiumButton';
+import ShoppingGuide from './components/ShoppingGuide';
 import AboutPage from './About';
 import ContactPage from './Contact';
 import AccountPage from './Account';
@@ -63,7 +63,7 @@ const App: React.FC = () => {
   const Header = () => (
     <header className="bg-white/95 backdrop-blur-xl border-b border-gray-50 sticky top-0 z-50">
       <div className="bg-[#F9F8F6] border-b border-gray-100 py-2">
-        <div className="max-w-[1600px] mx-auto px-5 md:px-10 flex justify-between items-center text-[9px] font-bold uppercase tracking-[0.2em] text-gray-400">
+        <div className="max-w-[1600px] mx-auto px-5 md:px-10 flex justify-between items-center text-[9px] font-bold uppercase tracking-[0.3em] text-gray-400">
           <div className="flex gap-6 items-center">
             <div className="flex gap-2">
               <button onClick={() => setLanguage('EN')} className={`hover:text-[#344C3D] transition-colors ${language === 'EN' ? 'text-[#344C3D]' : ''}`}>EN</button>
@@ -93,12 +93,37 @@ const App: React.FC = () => {
           <div className="text-[8px] md:text-[9px] tracking-[0.8em] font-medium text-gray-400 uppercase w-full pl-[0.8em]">LIVING</div>
         </div>
 
-        <nav className="hidden lg:flex items-center space-x-10 xl:space-x-14 text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400">
-          <button onClick={() => navigateTo('home')} className={`${currentPage === 'home' ? 'text-black' : ''} hover:text-black transition-colors`}>{t('nav.home')}</button>
-          <button onClick={() => navigateTo('approach')} className={`${currentPage === 'approach' ? 'text-black' : ''} hover:text-black transition-colors`}>{t('nav.approach')}</button>
-          <button onClick={() => navigateTo('shop')} className={`${currentPage === 'shop' ? 'text-black' : ''} hover:text-black transition-colors`}>{t('nav.shop')}</button>
-          <button onClick={() => navigateTo('blog')} className={`${currentPage === 'blog' ? 'text-black' : ''} hover:text-black transition-colors`}>{t('nav.blog')}</button>
-          <button onClick={() => navigateTo('about')} className={`${currentPage === 'about' ? 'text-black' : ''} hover:text-black transition-colors`}>{t('nav.about')}</button>
+        <nav className="hidden lg:flex items-center space-x-10 xl:space-x-14 text-[10px] font-bold uppercase tracking-[0.45em]">
+          <button 
+            onClick={() => navigateTo('home')} 
+            className={`${currentPage === 'home' ? 'text-black font-bold' : 'text-gray-400 font-medium'} uppercase tracking-[0.45em] hover:text-black transition-colors transition-all duration-300`}
+          >
+            {t('nav.home')}
+          </button>
+          <button 
+            onClick={() => navigateTo('approach')} 
+            className={`${currentPage === 'approach' ? 'text-black font-bold' : 'text-gray-400 font-medium'} uppercase tracking-[0.45em] hover:text-black transition-colors transition-all duration-300`}
+          >
+            {t('nav.approach')}
+          </button>
+          <button 
+            onClick={() => navigateTo('shop')} 
+            className={`${currentPage === 'shop' ? 'text-black font-bold' : 'text-gray-400 font-medium'} uppercase tracking-[0.45em] hover:text-black transition-colors transition-all duration-300`}
+          >
+            {t('nav.shop')}
+          </button>
+          <button 
+            onClick={() => navigateTo('blog')} 
+            className={`${currentPage === 'blog' ? 'text-black font-bold' : 'text-gray-400 font-medium'} uppercase tracking-[0.45em] hover:text-black transition-colors transition-all duration-300`}
+          >
+            {t('nav.blog')}
+          </button>
+          <button 
+            onClick={() => navigateTo('about')} 
+            className={`${currentPage === 'about' ? 'text-black font-bold' : 'text-gray-400 font-medium'} uppercase tracking-[0.45em] hover:text-black transition-colors transition-all duration-300`}
+          >
+            {t('nav.about')}
+          </button>
         </nav>
 
         <div className="flex items-center ml-auto gap-6 md:gap-8 xl:gap-10">
@@ -117,7 +142,7 @@ const App: React.FC = () => {
               </span>
             )}
           </button>
-          <button onClick={() => navigateTo('shop')} className="hidden sm:block bg-[#344C3D] text-white px-6 xl:px-8 py-2.5 rounded-full text-[9px] font-bold tracking-[0.3em] uppercase hover:bg-black transition-all shadow-sm">
+          <button onClick={() => navigateTo('shop')} className="hidden sm:block bg-[#344C3D] text-white px-6 xl:px-8 py-2.5 rounded-full text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-black transition-all shadow-sm">
             {t('nav.order')}
           </button>
         </div>
@@ -201,12 +226,12 @@ const App: React.FC = () => {
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
                  </button>
               </div>
-              <nav className="flex flex-col space-y-8 text-2xl font-bold tracking-tighter text-[#344C3D]">
-                 <button onClick={() => navigateTo('home')} className="text-left">{t('nav.home')}</button>
-                 <button onClick={() => navigateTo('approach')} className="text-left">{t('nav.approach')}</button>
-                 <button onClick={() => navigateTo('shop')} className="text-left">{t('nav.shop')}</button>
-                 <button onClick={() => navigateTo('blog')} className="text-left">{t('nav.blog')}</button>
-                 <button onClick={() => navigateTo('about')} className="text-left">{t('nav.about')}</button>
+              <nav className="flex flex-col space-y-8 text-[12px] font-bold uppercase tracking-[0.5em] text-[#344C3D]">
+                 <button onClick={() => navigateTo('home')} className="text-left uppercase tracking-[0.4em]">{t('nav.home')}</button>
+                 <button onClick={() => navigateTo('approach')} className="text-left uppercase tracking-[0.4em]">{t('nav.approach')}</button>
+                 <button onClick={() => navigateTo('shop')} className="text-left uppercase tracking-[0.4em]">{t('nav.shop')}</button>
+                 <button onClick={() => navigateTo('blog')} className="text-left uppercase tracking-[0.4em]">{t('nav.blog')}</button>
+                 <button onClick={() => navigateTo('about')} className="text-left uppercase tracking-[0.4em]">{t('nav.about')}</button>
               </nav>
            </div>
         </div>
@@ -223,17 +248,17 @@ const App: React.FC = () => {
           <div className="space-y-6">
             <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-gray-300">System</h4>
             <nav className="flex flex-col space-y-3 text-sm font-medium text-gray-500">
-               <button onClick={() => navigateTo('approach')} className="text-left hover:text-black">{t('nav.approach')}</button>
-               <button onClick={() => navigateTo('shop')} className="text-left hover:text-black">{t('nav.shop')}</button>
-               <button onClick={() => navigateTo('faq')} className="text-left hover:text-black">{t('nav.faq')}</button>
+               <button onClick={() => navigateTo('approach')} className="text-left hover:text-black uppercase tracking-widest text-[10px]">{t('nav.approach')}</button>
+               <button onClick={() => navigateTo('shop')} className="text-left hover:text-black uppercase tracking-widest text-[10px]">{t('nav.shop')}</button>
+               <button onClick={() => navigateTo('faq')} className="text-left hover:text-black uppercase tracking-widest text-[10px]">{t('nav.faq')}</button>
             </nav>
           </div>
           <div className="space-y-6">
             <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-gray-300">Connect</h4>
             <nav className="flex flex-col space-y-3 text-sm font-medium text-gray-500">
-               <button onClick={() => navigateTo('contact')} className="text-left hover:text-black">Contact</button>
-               <button onClick={() => navigateTo('blog')} className="text-left hover:text-black">{t('nav.blog')}</button>
-               <a href="mailto:calontliving@gmail.com" className="hover:text-black">Email</a>
+               <button onClick={() => navigateTo('contact')} className="text-left hover:text-black uppercase tracking-widest text-[10px]">Contact</button>
+               <button onClick={() => navigateTo('blog')} className="text-left hover:text-black uppercase tracking-widest text-[10px]">{t('nav.blog')}</button>
+               <a href="mailto:calontliving@gmail.com" className="hover:text-black uppercase tracking-widest text-[10px]">Email</a>
             </nav>
           </div>
         </div>

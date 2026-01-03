@@ -1,3 +1,4 @@
+
 import React from 'react';
 import SectionWrapper from './SectionWrapper';
 import ClarityCardGenerator from './ClarityCardGenerator';
@@ -5,7 +6,6 @@ import ClarityCardGenerator from './ClarityCardGenerator';
 const ApproachPage: React.FC = () => {
   return (
     <div className="animate-in fade-in duration-700">
-      {/* Five Gentle Practices */}
       <SectionWrapper id="approach-header" bg="#FFFFFF" className="pt-24 md:pt-48 pb-12">
         <div className="max-w-4xl space-y-12">
           <h1 className="text-5xl md:text-[100px] font-bold tracking-tighter leading-[0.9] text-[#344C3D]">Five gentle practices for a steadier, clearer life.</h1>
