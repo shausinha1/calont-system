@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { COLORS } from './constants.ts';
 
 interface PremiumButtonProps {
   label: string;

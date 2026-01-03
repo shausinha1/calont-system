@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { startShoppingChat } from './geminiService.ts';
+import { startShoppingChat } from './geminiService';
 import { Chat, GenerateContentResponse } from '@google/genai';
 
 const ShoppingGuide: React.FC = () => {
@@ -59,13 +59,11 @@ const ShoppingGuide: React.FC = () => {
     <div className="fixed bottom-8 right-8 z-[1000] flex flex-col items-end">
       {isOpen && (
         <div className="w-[320px] sm:w-[380px] h-[500px] bg-white shadow-2xl border border-gray-100 flex flex-col mb-4 overflow-hidden animate-in slide-in-from-bottom-4 duration-300">
-          <div className="p-6 border-b border-gray-50 flex justify-between items-center bg-white">
+          <div className="p-6 border-b border-gray-50 flex justify-between items-center">
             <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#344C3D]">Guide</span>
-            <button onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-black">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/></svg>
-            </button>
+            <button onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-black">×</button>
           </div>
-          <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6">
+          <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide">
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div className={`max-w-[85%] text-sm ${msg.role === 'user' ? 'bg-gray-50 p-4' : 'italic text-gray-500'}`}>
@@ -81,16 +79,14 @@ const ShoppingGuide: React.FC = () => {
               placeholder="Ask about the system..."
               className="flex-1 outline-none text-sm font-light"
             />
-            <button type="submit" className="text-[#344C3D]">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </button>
+            <button type="submit" className="text-[#344C3D]">→</button>
           </form>
         </div>
       )}
       <button 
         onClick={handleToggle}
-        className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg ${
-          isOpen ? 'bg-white text-[#344C3D]' : 'bg-[#344C3D] text-white hover:scale-110'
+        className={`w-14 h-14 rounded-full flex items-center justify-center shadow-lg ${
+          isOpen ? 'bg-white text-[#344C3D]' : 'bg-[#344C3D] text-white'
         }`}
       >
         {isOpen ? '↓' : 'C'}

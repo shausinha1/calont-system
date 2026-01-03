@@ -87,46 +87,9 @@ const App: React.FC = () => {
     </header>
   );
 
-  const Footer = () => (
-    <footer className="bg-white pt-32 pb-16 px-5 md:px-10 border-t border-gray-50">
-      <div className="max-w-[1600px] mx-auto space-y-24">
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-16 lg:gap-32">
-          <div className="flex flex-col items-start space-y-10">
-            <div className="text-3xl font-bold tracking-[0.5em] leading-none mb-2 text-[#344C3D]">CALONT</div>
-            <div className="text-[10px] tracking-[0.8em] font-medium text-gray-400 uppercase w-full">LIVING</div>
-            <p className="text-gray-400 text-base max-w-sm font-light leading-relaxed">
-              A thoughtful design brand focused on daily mental clarity and the human rhythm.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-12 md:gap-x-40 gap-y-16 w-full lg:w-auto">
-            <div className="space-y-8">
-              <h5 className="text-[11px] uppercase tracking-[0.5em] font-bold text-[#344C3D]">Explore</h5>
-              <ul className="space-y-5 text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400">
-                <li><button onClick={() => navigateTo('home')}>Home</button></li>
-                <li><button onClick={() => navigateTo('approach')}>Approach</button></li>
-                <li><button onClick={() => navigateTo('shop')}>Shop</button></li>
-                <li><button onClick={() => navigateTo('blog')}>Notes</button></li>
-              </ul>
-            </div>
-            <div className="space-y-8">
-              <h5 className="text-[11px] uppercase tracking-[0.5em] font-bold text-[#344C3D]">Support</h5>
-              <ul className="space-y-5 text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400">
-                <li><button onClick={() => navigateTo('contact')}>Contact</button></li>
-                <li><button onClick={() => navigateTo('faq')}>FAQ</button></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="pt-12 border-t border-gray-50 flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] uppercase tracking-[0.4em] text-gray-300 font-bold text-center w-full">
-          <p>&copy; 2026 Calont Living<sup>TM</sup></p>
-        </div>
-      </div>
-    </footer>
-  );
-
   const HomePage = () => (
     <div className="animate-in fade-in duration-1000">
-      {/* Hero Section - Bold Product Focus */}
+      {/* Hero Section */}
       <SectionWrapper id="hero" noPadding fullWidth className="bg-[#FFFFFF]">
         <div className="relative min-h-[90dvh] flex flex-col items-center justify-center text-center py-12 md:py-20 overflow-hidden">
           <div className="absolute inset-0 z-0">
@@ -160,7 +123,7 @@ const App: React.FC = () => {
             Created for people who value clarity, and thoughtful design.
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
+            <div className="space-y-8 text-center md:text-left">
               <p className="text-xl md:text-3xl font-bold text-[#344C3D]">This system is for you if:</p>
               <ul className="space-y-6">
                 {[
@@ -169,14 +132,14 @@ const App: React.FC = () => {
                   'you want to be screen-free',
                   'you care about intention',
                 ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-4 text-xl md:text-2xl font-light text-gray-500">
+                  <li key={i} className="flex items-center gap-4 text-xl md:text-2xl font-light text-gray-500 justify-center md:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#738A6E]"></div>
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="aspect-square bg-gray-50 overflow-hidden">
+            <div className="aspect-square bg-gray-50 overflow-hidden shadow-2xl">
                <img src="https://images.unsplash.com/photo-1510739859545-e7b9e979de86?q=80&w=1200" className="w-full h-full object-cover grayscale opacity-80" alt="" />
             </div>
           </div>
@@ -216,31 +179,12 @@ const App: React.FC = () => {
           </div>
         </div>
       </SectionWrapper>
-
-      {/* Testimonials */}
-      <SectionWrapper id="testimonials" bg="#FFFFFF" className="py-24 md:py-48">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
-          {[
-            { text: "Calont Living gave me something I could actually return to. No pressure. No apps. Just a gentle anchor in my day.", name: "Rosa G.", location: "Calgary, AB" },
-            { text: "I didn’t realize how much noise my mind was carrying until I began practising regularly. The simplicity helped.", name: "Sarah M.", location: "Calgary, AB" }
-          ].map((t, idx) => (
-            <div key={idx} className="bg-[#F9F8F6] p-12 md:p-20 space-y-12 border border-gray-50 shadow-sm">
-              <p className="text-xl md:text-3xl font-serif italic text-[#344C3D] leading-relaxed">"{t.text}"</p>
-              <div>
-                <p className="font-bold text-[#344C3D] text-lg">{t.name}</p>
-                <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold">{t.location}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </SectionWrapper>
       
       {/* Final Product CTA */}
       <SectionWrapper id="cta-final" bg="#FFFFFF" className="py-32 md:py-48">
         <div className="max-w-4xl mx-auto text-center space-y-12">
           <h2 className="text-5xl md:text-8xl font-bold tracking-tighter text-[#344C3D]">Begin your practice.</h2>
-          <p className="text-xl md:text-3xl font-light text-gray-400 max-w-2xl mx-auto">Everything you need for a daily rhythm of clarity and steadiness.</p>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 pt-12">
             <PremiumButton label="Order the Essentials Pack" onClick={() => navigateTo('shop')} />
           </div>
           <p className="text-[9px] uppercase tracking-[0.5em] font-bold text-gray-300">Complimentary Shipping Included</p>
@@ -268,7 +212,10 @@ const App: React.FC = () => {
       <Header />
       <main>{renderContent()}</main>
       <ShoppingGuide />
-      <Footer />
+      <footer className="bg-white pt-24 pb-12 px-5 md:px-10 border-t border-gray-50 text-center">
+        <div className="text-xl font-bold tracking-[0.5em] text-[#344C3D] mb-4">CALONT</div>
+        <p className="text-[9px] uppercase tracking-[0.4em] text-gray-300 font-bold">&copy; 2026 Calont Living<sup>TM</sup></p>
+      </footer>
     </div>
   );
 };

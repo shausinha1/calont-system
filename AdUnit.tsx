@@ -8,8 +8,6 @@ interface AdUnitProps {
 }
 
 const AdUnit: React.FC<AdUnitProps> = ({ slot, format = 'auto', className = "" }) => {
-  const PUBLISHER_ID = "ca-pub-XXXXXXXXXXXXXXXX";
-
   useEffect(() => {
     try {
       // @ts-ignore
@@ -22,7 +20,7 @@ const AdUnit: React.FC<AdUnitProps> = ({ slot, format = 'auto', className = "" }
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-client={PUBLISHER_ID}
+        data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
         data-ad-slot={slot}
         data-ad-format={format}
         data-full-width-responsive="true"
